@@ -8,27 +8,27 @@ export default {
         {
           title: 'Главная',
           id: 'main',
-          alt: '',
+          alt: 'цветочек',
         },
         {
           title: 'Каталог',
           id: 'catalog',
-          alt: '',
+          alt: 'лупа',
         },
         {
           title: 'Корзина',
           id: 'cart',
-          alt: '',
+          alt: 'сумка с товарами',
         },
         {
           title: 'Избранное',
           id: 'favorites',
-          alt: '',
+          alt: 'сердечко',
         },
         {
           title: 'Профиль',
           id: 'profile',
-          alt: '',
+          alt: 'пользователь',
         },
       ],
     };
