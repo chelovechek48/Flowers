@@ -1,9 +1,9 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue';
+import PageContainer from './components/PageContainer.vue';
 </script>
 
 <template>
-  <HelloWorld message-text="new-project" />
+  <PageContainer />
 </template>
 
 <style scoped>
