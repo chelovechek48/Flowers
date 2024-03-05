@@ -52,7 +52,7 @@ export default {
         >
           <a
             class="navigation__link"
-            href=""
+            :href="`#${item.id}`"
             :aria-label="`открыть раздел ${item.title}`"
           >
             <svg
