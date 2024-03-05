@@ -1,10 +1,10 @@
 <script setup>
-import UserNavigationList from '@components/UserNavigation/UserNavigationList.vue';
+import UserNavigation from '@components/UserNavigation.vue';
 </script>
 
 <template>
   <div class="container">
-    <UserNavigationList />
+    <UserNavigation />
   </div>
 </template>
 
