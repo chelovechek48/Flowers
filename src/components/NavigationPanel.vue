@@ -1,7 +1,16 @@
 <script>
-import spritePath from '@icons/navigation/sprite.svg';
+import spritePath from '@icons/navigation-panel/sprite.svg';
+import ButtonSVG from '@components/ButtonSVG.vue';
 
 export default {
+  components: {
+    ButtonSVG,
+  },
+  methods: {
+    importPath(id) {
+      return `${spritePath}#${id}`;
+    },
+  },
   data() {
     return {
       navigationItems: [
@@ -33,38 +42,22 @@ export default {
       ],
     };
   },
-  methods: {
-    importPath(id) {
-      return `${spritePath}#${id}`;
-    },
-  },
 };
 </script>
 
 <template>
   <header class="navigation">
     <nav class="container">
-      <ul class="navigation__list">
+      <ul class="list">
         <li
           v-for="item in navigationItems"
           :key="item.title"
           :item="item"
         >
-          <a
-            class="navigation__link"
-            :href="`#${item.id}`"
-            :aria-label="`открыть раздел ${item.title}`"
-          >
-            <svg
-              class="navigation__image"
-              viewBox="0 0 1 1"
-            >
-              <use :href="importPath(item.id)" />
-            </svg>
-            <span class="navigation__title">
-              {{ item.title }}
-            </span>
-          </a>
+          <ButtonSVG
+            :icon-text="item.title"
+            :svg-path="importPath(item.id)"
+          />
         </li>
       </ul>
     </nav>
@@ -74,7 +67,6 @@ export default {
 <style lang="scss" scoped>
 @use '@vars/container';
 @use '@vars/colors';
-@use '@vars/breakpoints' as *;
 
 .container {
   max-width: container.$width;
@@ -91,43 +83,11 @@ export default {
   position: fixed;
   bottom: 0;
   left: 0;
+}
 
-  &__list {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &__link {
-    color: colors.$gray;
-    font-family: "Inter", sans-serif;
-    font-size: clamp(0.5rem, 3.5vw, 1.25rem);
-    font-weight: 500;
-
-    transition: 200ms ease;
-
-    &:hover,
-    &.active {
-      color: colors.$pink;
-    }
-
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  &__image {
-    @media (min-width: calc($mobile-small + 1px)) {
-      height: 1.75rem;
-    }
-    @media (max-width: $mobile-small) {
-      height: 12vw;
-    }
-  }
-
-  @media (max-width: $mobile-small) {
-    &__title {
-      display: none;
-    }
-  }
+.list {
+  color: colors.$gray;
+  display: flex;
+  justify-content: space-between;
 }
 </style>

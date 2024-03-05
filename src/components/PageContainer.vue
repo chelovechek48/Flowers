@@ -1,10 +1,12 @@
 <script setup>
 import NavigationPanel from '@components/NavigationPanel.vue';
+import FirstScreen from '@components/FirstScreen.vue';
 </script>
 
 <template>
   <div class="container">
     <NavigationPanel />
+    <FirstScreen />
   </div>
 </template>
 
@@ -14,7 +16,7 @@ import NavigationPanel from '@components/NavigationPanel.vue';
 .container {
   max-width: container.$width;
   min-height: 100vh;
-  padding-inline: container.$padding;
+  padding: container.$padding;
   margin-inline: auto;
 
   background-color: #fff;
