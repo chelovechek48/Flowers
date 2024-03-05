@@ -47,7 +47,7 @@ export default {
 
 <template>
   <header class="navigation">
-    <nav class="container">
+    <nav>
       <ul class="list">
         <li
           v-for="item in navigationItems"
@@ -65,17 +65,8 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@use '@vars/container';
 @use '@vars/colors';
-
-.container {
-  max-width: container.$width;
-  padding: 0.5rem container.$padding;
-  margin-inline: auto;
-
-  background-color: colors.$white;
-  border-top: solid 1px colors.$gray;
-}
+@use '@vars/container';
 
 .navigation {
   z-index: 100;
@@ -89,5 +80,12 @@ export default {
   color: colors.$gray;
   display: flex;
   justify-content: space-between;
+
+  max-width: container.$width;
+  padding: 0.5rem container.$padding;
+  margin-inline: auto;
+
+  background-color: colors.$white;
+  border-top: solid 1px colors.$gray;
 }
 </style>

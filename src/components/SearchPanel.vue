@@ -40,8 +40,20 @@ export default {
 @use '@vars/colors';
 @use '@vars/breakpoints' as *;
 
+.search-panel {
+  z-index: 100;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 .list {
-  color: colors.$pink;
+  max-width: container.$width;
+  padding: container.$padding;
+  margin-inline: auto;
+
+  color: colors.$plum;
+  background-color: colors.$white;
 
   display: flex;
   justify-content: space-between;
