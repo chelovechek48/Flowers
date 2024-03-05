@@ -55,8 +55,9 @@ export default {
           :item="item"
         >
           <ButtonSVG
-            :icon-text="item.title"
             :svg-path="importPath(item.id)"
+            :button-text="item.title"
+            :aria-label="`Перейти в раздел ${item.title}`"
           />
         </li>
       </ul>

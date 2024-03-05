@@ -6,24 +6,28 @@ export default {
       required: false,
       default: 'icon',
     },
-    aspectRatio: {
-      type: String,
-      required: false,
-      default: '1 1',
-    },
     svgPath: {
       type: String,
       required: true,
     },
-    iconText: {
+    svgRatio: {
+      type: String,
+      required: false,
+      default: '1 1',
+    },
+    buttonText: {
       type: String,
       required: false,
       default: '',
     },
+    ariaLabel: {
+      type: String,
+      required: true,
+    },
   },
   computed: {
     viewBox() {
-      return `0 0 ${this.aspectRatio}`;
+      return `0 0 ${this.svgRatio}`;
     },
   },
 };
@@ -33,6 +37,7 @@ export default {
   <a
     class="link"
     href=""
+    :aria-label="ariaLabel"
   >
     <svg
       :class="svgClassName"
@@ -41,10 +46,10 @@ export default {
       <use :href="svgPath" />
     </svg>
     <span
-      v-if="iconText"
+      v-if="buttonText"
       class="text"
     >
-      {{ iconText }}
+      {{ buttonText }}
     </span>
   </a>
 </template>
