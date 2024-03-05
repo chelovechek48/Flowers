@@ -1,10 +1,10 @@
 <script setup>
-import UserNavigation from '@components/UserNavigation.vue';
+import NavigationPanel from '@components/NavigationPanel.vue';
 </script>
 
 <template>
   <div class="container">
-    <UserNavigation />
+    <NavigationPanel />
   </div>
 </template>
 
