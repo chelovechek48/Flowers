@@ -1,13 +1,11 @@
 <script setup>
-
+import HelloWorld from './components/HelloWorld.vue';
 </script>
 
 <template>
-  <h1>123</h1>
+  <HelloWorld message-text="new-project" />
 </template>
 
-<style lang="scss">
-body {
-  background: rgb(209, 209, 209);
-}
+<style scoped>
+
 </style>
