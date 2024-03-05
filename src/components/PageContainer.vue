@@ -8,9 +8,12 @@
 </template>
 
 <style lang="scss" scoped>
+@use '@vars/container' as container;
 
 .container {
+  max-width: container.$width;
   min-height: 100vh;
+  padding: container.$padding;
   margin-inline: auto;
 
   background-color: #fff;

@@ -1,9 +1,9 @@
 <script setup>
-import PageContainer from './components/PageContainer.vue';
+
 </script>
 
 <template>
-  <PageContainer />
+  <h1>123</h1>
 </template>
 
 <style lang="scss">
