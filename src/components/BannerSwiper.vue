@@ -3,12 +3,16 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
-import pathToAnyFile from '@images/banner/букет-невест@1.25x.webp';
+import path from '@images/banner/букет-невест@1.25x.webp';
 
 export default {
   components: {
     Swiper,
     SwiperSlide,
+  },
+  beforeCreate() {
+    const images = import.meta.glob('@images/banner/*.webp');
+    console.log(images);
   },
   setup() {
     return {
@@ -22,20 +26,15 @@ export default {
     moveToSlide(index) {
       this.currentSwiper.slideTo(index);
     },
-    getUpdatedImagePath(originalPath) {
-      console.log(import.meta.env.BASE_URL, originalPath);
-      return import.meta.env.BASE_URL + originalPath;
-    },
   },
   data() {
     return {
       currentSwiper: undefined,
-      folderPath: `${pathToAnyFile.substring(0, pathToAnyFile.lastIndexOf('/'))}/`,
       slides: [
         {
           link: '#',
           description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: pathToAnyFile,
+          image: path,
           alt: 'букет состоящий из белых цветов',
         },
         {
@@ -47,7 +46,7 @@ export default {
         {
           link: '#',
           description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: `${pathToAnyFile.substring(0, pathToAnyFile.lastIndexOf('/'))}/букет-невест@1.25x.webp`,
+          image: '@images/banner/букет-невест@1.25x.webp',
           alt: 'букет состоящий из белых цветов',
         },
       ],
@@ -83,7 +82,7 @@ export default {
       >
         <img
           class="image"
-          :src="getUpdatedImagePath(slide.image)"
+          :src="slide.image"
           :alt="slide.alt"
         >
       </a>
