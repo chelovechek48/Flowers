@@ -5,12 +5,6 @@ import 'swiper/css';
 
 import pathToAnyFile from '@images/banner/букет-невест@1.25x.webp';
 
-// for (const path in imageContext) {
-//   if (path.includes('/index.')) continue;
-//   const image = await imageContext[path]();
-//   imagePaths.push(image.default);
-// }
-
 export default {
   components: {
     Swiper,
@@ -21,14 +15,6 @@ export default {
       modules: [Autoplay],
     };
   },
-  created() {
-    const imageContext = import.meta.glob('@images/banner/*.webp');
-    console.log(imageContext);
-    const imagePaths = [];
-    // const imageName = 'букет-невест@1.25x.webp';
-    // const specificImage = imagePaths.find((imagePath) => imagePath.includes(imageName));
-    // console.log(specificImage);
-  },
   methods: {
     getCurrentSwiper(swiper) {
       this.currentSwiper = swiper;
@@ -36,8 +22,9 @@ export default {
     moveToSlide(index) {
       this.currentSwiper.slideTo(index);
     },
-    path(name) {
-      return this.folderPath + name;
+    getUpdatedImagePath(originalPath) {
+      console.log(import.meta.env.BASE_URL, originalPath);
+      return import.meta.env.BASE_URL + originalPath;
     },
   },
   data() {
@@ -96,7 +83,7 @@ export default {
       >
         <img
           class="image"
-          :src="slide.image"
+          :src="getUpdatedImagePath(slide.image)"
           :alt="slide.alt"
         >
       </a>
