@@ -27,6 +27,7 @@ export default {
     return {
       currentSwiper: undefined,
       folderPath: `${pathToAnyFile.substring(0, pathToAnyFile.lastIndexOf('/'))}/`,
+      path: pathToAnyFile,
       slides: [
         {
           link: '#',
@@ -79,7 +80,7 @@ export default {
       >
         <img
           class="image"
-          src="@images/banner/букет-невест@1.25x.webp"
+          :src="path"
           :alt="slide.alt"
         >
       </a>
