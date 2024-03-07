@@ -22,29 +22,31 @@ export default {
     moveToSlide(index) {
       this.currentSwiper.slideTo(index);
     },
+    path(name) {
+      return this.folderPath + name;
+    },
   },
   data() {
     return {
       currentSwiper: undefined,
       folderPath: `${pathToAnyFile.substring(0, pathToAnyFile.lastIndexOf('/'))}/`,
-      path: pathToAnyFile,
       slides: [
         {
           link: '#',
           description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: 'букет-невест@1.25x.webp',
+          image: pathToAnyFile,
           alt: 'букет состоящий из белых цветов',
         },
         {
           link: '#',
           description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: 'букет-невест@1.25x.webp',
+          image: `${pathToAnyFile.substring(0, pathToAnyFile.lastIndexOf('/'))}/букет-невест@1.25x.webp`,
           alt: 'букет состоящий из белых цветов',
         },
         {
           link: '#',
           description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: 'букет-невест@1.25x.webp',
+          image: '@images/banner/букет-невест@1.25x.webp',
           alt: 'букет состоящий из белых цветов',
         },
       ],
@@ -80,7 +82,7 @@ export default {
       >
         <img
           class="image"
-          :src="path"
+          :src="slide.image"
           :alt="slide.alt"
         >
       </a>
