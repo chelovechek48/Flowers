@@ -22,9 +22,6 @@ export default {
     moveToSlide(index) {
       this.currentSwiper.slideTo(index);
     },
-    imageUrl(path) {
-      return new URL(path, import.meta.url);
-    },
   },
   data() {
     return {
@@ -33,19 +30,19 @@ export default {
         {
           link: '#',
           description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: '../assets/images/banner/букет-невест@1.25x.webp',
+          image: bannerImage,
           alt: 'букет состоящий из белых цветов',
         },
         {
           link: '#',
           description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: 'букет-невест@1.25x.webp',
+          image: '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp',
           alt: 'букет состоящий из белых цветов',
         },
         {
           link: '#',
           description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: '../assets/images/banner/букет-невест@1.25x.webp',
+          image: '@images/banner/букет-невест@1.25x.webp',
           alt: 'букет состоящий из белых цветов',
         },
       ],
@@ -81,7 +78,7 @@ export default {
       >
         <img
           class="image"
-          :src="imageUrl(slide.image)"
+          :src="(slide.image)"
           :alt="slide.alt"
         >
       </a>
