@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
+import pathToAnyFile from '@images/banner/букет-невест@1.25x.webp';
+
 export default {
   components: {
     Swiper,
@@ -13,43 +15,72 @@ export default {
       modules: [Autoplay],
     };
   },
+  methods: {
+    getCurrentSwiper(swiper) {
+      this.currentSwiper = swiper;
+    },
+    moveToSlide(index) {
+      this.currentSwiper.slideTo(index);
+    },
+  },
+  data() {
+    return {
+      currentSwiper: undefined,
+      folderPath: `${pathToAnyFile.substring(0, pathToAnyFile.lastIndexOf('/'))}/`,
+      slides: [
+        {
+          link: '#',
+          description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
+          image: 'букет-невест@1.25x.webp',
+          alt: 'букет состоящий из белых цветов',
+        },
+        {
+          link: '#',
+          description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
+          image: 'букет-невест@1.25x.webp',
+          alt: 'букет состоящий из белых цветов',
+        },
+        {
+          link: '#',
+          description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
+          image: 'букет-невест@1.25x.webp',
+          alt: 'букет состоящий из белых цветов',
+        },
+      ],
+    };
+  },
 };
 </script>
 
 <template>
   <Swiper
+    @Swiper="getCurrentSwiper"
     class="swiper"
     :loop="true"
     slides-per-view="auto"
     space-between="12"
 
     :modules="modules"
-    :autoplay="{delay: 2500}"
+    :autoplay="{
+      delay: 2500,
+      disableOnInteraction: true,
+    }"
   >
-    <Swiper-slide class="slide">
-      <a href="">
+    <Swiper-slide
+      class="slide"
+      v-for="(slide, index) in slides"
+      :key="slide.link"
+    >
+      <a
+        class="link"
+        @focus="moveToSlide(index)"
+        :href="slide.link"
+        :aria-label="slide.description + '. Перейти к акции'"
+      >
         <img
           class="image"
-          src="@images/banner/букет-невест@1.25x.jpg"
-          alt=""
-        >
-      </a>
-    </Swiper-slide>
-    <Swiper-slide class="slide">
-      <a href="">
-        <img
-          class="image"
-          src="@images/banner/букет-невест@1.25x.jpg"
-          alt=""
-        >
-      </a>
-    </Swiper-slide>
-    <Swiper-slide class="slide">
-      <a href="">
-        <img
-          class="image"
-          src="@images/banner/букет-невест@1.25x.jpg"
-          alt=""
+          :src="folderPath + (slide.image)"
+          :alt="slide.alt"
         >
       </a>
     </Swiper-slide>
@@ -60,14 +91,18 @@ export default {
 @use '@vars/container';
 
 .swiper {
-  padding-inline: container.$padding;
-  margin-inline: (0 - container.$padding);
+  padding: container.$padding;
+  margin: (0 - container.$padding);
 }
 .slide {
   max-width: 20rem;
 }
+.link {
+  display: block;
+  border-radius: 1rem;
+  overflow: hidden;
+}
 .image {
   width: 100%;
-  border-radius: 1rem;
 }
 </style>
