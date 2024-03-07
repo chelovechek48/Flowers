@@ -40,13 +40,13 @@ export default {
         {
           link: '#',
           description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: `${pathToAnyFile.substring(0, pathToAnyFile.lastIndexOf('/'))}/букет-невест@1.25x.webp`,
+          image: '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp',
           alt: 'букет состоящий из белых цветов',
         },
         {
           link: '#',
           description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: '@images/banner/букет-невест@1.25x.webp',
+          image: `${pathToAnyFile.substring(0, pathToAnyFile.lastIndexOf('/'))}/букет-невест@1.25x.webp`,
           alt: 'букет состоящий из белых цветов',
         },
       ],
