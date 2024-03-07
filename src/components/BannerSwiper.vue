@@ -79,7 +79,7 @@ export default {
       >
         <img
           class="image"
-          :src="folderPath + (slide.image)"
+          src="@images/banner/букет-невест@1.25x.webp"
           :alt="slide.alt"
         >
       </a>
