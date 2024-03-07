@@ -5,6 +5,17 @@ import 'swiper/css';
 
 import pathToAnyFile from '@images/banner/букет-невест@1.25x.webp';
 
+const imageContext = import.meta.glob('@images/banner/*.webp');
+const imagePaths = [];
+
+for (const path in imageContext) {
+  if (path.includes('/index.')) continue;
+  const image = await imageContext[path]();
+  imagePaths.push(image.default);
+}
+
+console.log(imagePaths);
+
 export default {
   components: {
     Swiper,
