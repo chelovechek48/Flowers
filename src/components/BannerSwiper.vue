@@ -6,15 +6,14 @@ import 'swiper/css';
 import pathToAnyFile from '@images/banner/букет-невест@1.25x.webp';
 
 const imageContext = import.meta.glob('@images/banner/*.webp');
+console.log(imageContext);
 const imagePaths = [];
 
-for (const path in imageContext) {
-  if (path.includes('/index.')) continue;
-  const image = await imageContext[path]();
-  imagePaths.push(image.default);
-}
-
-console.log(imagePaths);
+// for (const path in imageContext) {
+//   if (path.includes('/index.')) continue;
+//   const image = await imageContext[path]();
+//   imagePaths.push(image.default);
+// }
 
 export default {
   components: {
@@ -25,6 +24,11 @@ export default {
     return {
       modules: [Autoplay],
     };
+  },
+  created() {
+    const imageName = 'букет-невест@1.25x.webp';
+    const specificImage = imagePaths.find((imagePath) => imagePath.includes(imageName));
+    console.log(specificImage);
   },
   methods: {
     getCurrentSwiper(swiper) {
