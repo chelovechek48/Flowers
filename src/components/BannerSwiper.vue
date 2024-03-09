@@ -16,8 +16,14 @@ export default {
     };
   },
   methods: {
-    getCurrentSwiper(swiper) {
+    initSwiper(swiper) {
       this.currentSwiper = swiper;
+    },
+    swipeToStart(swiper) {
+      const { activeIndex } = swiper;
+      if (activeIndex === swiper.slides.length - 1) {
+        swiper.slideTo(0);
+      }
     },
     moveToSlide(index) {
       this.currentSwiper.slideTo(index);
@@ -28,21 +34,24 @@ export default {
       currentSwiper: undefined,
       slides: [
         {
+          id: 1,
           link: '#',
           description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
           image: bannerImage,
           alt: 'букет состоящий из белых цветов',
         },
         {
+          id: 2,
           link: '#',
           description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp',
+          image: bannerImage,
           alt: 'букет состоящий из белых цветов',
         },
         {
+          id: 3,
           link: '#',
           description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: '@images/banner/букет-невест@1.25x.webp',
+          image: bannerImage,
           alt: 'букет состоящий из белых цветов',
         },
       ],
@@ -53,11 +62,12 @@ export default {
 
 <template>
   <Swiper
-    @Swiper="getCurrentSwiper"
+    @swiper="initSwiper"
+    @reachEnd="swipeToStart"
     class="swiper"
-    :loop="true"
     slides-per-view="auto"
     space-between="12"
+    :lazy="true"
 
     :modules="modules"
     :autoplay="{
@@ -68,19 +78,26 @@ export default {
     <Swiper-slide
       class="slide"
       v-for="(slide, index) in slides"
-      :key="slide.link"
+      :key="slide.id"
     >
       <a
         class="link"
+        :id="slide.id"
         @focus="moveToSlide(index)"
         :href="slide.link"
         :aria-label="slide.description + '. Перейти к акции'"
       >
         <img
           class="image"
-          :src="(slide.image)"
+          :src="slide.image"
           :alt="slide.alt"
         >
+        <div
+          class="swiper-lazy image"
+          :data-src="slide.image"
+          :alt="slide.alt"
+        />
+        <div class="swiper-lazy-preloader" />
       </a>
     </Swiper-slide>
   </Swiper>
@@ -94,7 +111,10 @@ export default {
   margin: (0 - container.$padding);
 }
 .slide {
-  max-width: 20rem;
+  aspect-ratio: 398/225;
+  max-width: min(90%, 20rem);
+  height: 100%;
+  object-fit: cover;
 }
 .link {
   display: block;
