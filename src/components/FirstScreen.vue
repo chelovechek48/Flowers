@@ -1,17 +1,19 @@
 <script setup>
-import SearchPanel from '@components/SearchPanel.vue';
 import BannerSwiper from '@components/BannerSwiper.vue';
 </script>
 
 <template>
-  <section class="fiter-screen">
-    <SearchPanel />
+  <main class="first-screen">
     <BannerSwiper />
-  </section>
+  </main>
 </template>
 
 <style lang="scss" scoped>
-.fiter-screen {
-  padding-top: 70px;
+@use '@vars/container';
+
+.first-screen {
+  flex: 1 1 0;
+  overflow-y: auto;
+  padding: container.$padding;
 }
 </style>

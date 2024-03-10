@@ -46,7 +46,7 @@ export default {
 </script>
 
 <template>
-  <header class="navigation">
+  <header>
     <nav>
       <ul class="list">
         <li
@@ -68,14 +68,6 @@ export default {
 <style lang="scss" scoped>
 @use '@vars/colors';
 @use '@vars/container';
-
-.navigation {
-  z-index: 100;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-}
 
 .list {
   color: colors.$gray;

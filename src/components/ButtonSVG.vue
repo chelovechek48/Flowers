@@ -66,7 +66,7 @@ export default {
 
   color: inherit;
   font-family: "Inter", sans-serif;
-  font-size: clamp(0.5rem, 3.5vw, 1.25rem);
+  font-size: clamp(0.5rem, 3vw, 1.25rem);
   font-weight: 500;
 
   padding: container.$padding;
