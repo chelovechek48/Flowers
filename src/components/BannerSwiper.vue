@@ -1,63 +1,59 @@
-<script>
+<script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
 import bannerImage from '@images/banner/букет-невест@1.25x.webp';
 
-export default {
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
-  setup() {
-    return {
-      modules: [Autoplay],
-    };
-  },
-  methods: {
-    initSwiper(swiper) {
-      this.currentSwiper = swiper;
-    },
-    swipeToStart(swiper) {
-      const { activeIndex } = swiper;
-      if (activeIndex === swiper.slides.length - 1) {
-        swiper.slideTo(0);
-      }
-    },
-    moveToSlide(index) {
-      this.currentSwiper.slideTo(index);
-    },
-  },
-  data() {
-    return {
-      currentSwiper: undefined,
-      slides: [
-        {
-          id: 1,
-          link: '#',
-          description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: bannerImage,
-          alt: 'букет состоящий из белых цветов',
-        },
-        {
-          id: 2,
-          link: '#',
-          description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: bannerImage,
-          alt: 'букет состоящий из белых цветов',
-        },
-        {
-          id: 3,
-          link: '#',
-          description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-          image: bannerImage,
-          alt: 'букет состоящий из белых цветов',
-        },
-      ],
-    };
-  },
+let slides;
+const imported = (path) => {
+  import(path).then((image) => {
+    slides[0].image = image.default;
+    console.log('path');
+    return image.default;
+  });
 };
+
+slides = [
+  {
+    id: 1,
+    link: '#',
+    description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
+    image: imported('../assets/images/banner/букет-невест@1.25x.jpg'),
+    alt: 'букет состоящий из белых цветов',
+  },
+  {
+    id: 2,
+    link: '#',
+    description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
+    image: bannerImage,
+    alt: 'букет состоящий из белых цветов',
+  },
+  {
+    id: 3,
+    link: '#',
+    description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
+    image: bannerImage,
+    alt: 'букет состоящий из белых цветов',
+  },
+];
+
+const modules = [Autoplay];
+let currentSwiper;
+
+const initSwiper = (swiper) => {
+  currentSwiper = swiper;
+};
+const swipeToStart = (swiper) => {
+  const { activeIndex } = swiper;
+  if (activeIndex === swiper.slides.length - 1) {
+    swiper.slideTo(0);
+  }
+};
+const moveToSlide = (index) => {
+  currentSwiper.slideTo(index);
+};
+
 </script>
 
 <template>

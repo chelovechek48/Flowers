@@ -1,48 +1,36 @@
-<script>
+<script setup>
 import spritePath from '@icons/navigation-panel/sprite.svg';
 import ButtonSVG from '@components/ButtonSVG.vue';
 
-export default {
-  components: {
-    ButtonSVG,
+const importPath = (id) => `${spritePath}#${id}`;
+
+const navigationItems = [
+  {
+    title: 'Главная',
+    id: 'main',
+    alt: 'цветочек',
   },
-  methods: {
-    importPath(id) {
-      return `${spritePath}#${id}`;
-    },
+  {
+    title: 'Каталог',
+    id: 'catalog',
+    alt: 'лупа',
   },
-  data() {
-    return {
-      navigationItems: [
-        {
-          title: 'Главная',
-          id: 'main',
-          alt: 'цветочек',
-        },
-        {
-          title: 'Каталог',
-          id: 'catalog',
-          alt: 'лупа',
-        },
-        {
-          title: 'Корзина',
-          id: 'cart',
-          alt: 'сумка с товарами',
-        },
-        {
-          title: 'Избранное',
-          id: 'favorites',
-          alt: 'сердечко',
-        },
-        {
-          title: 'Профиль',
-          id: 'profile',
-          alt: 'пользователь',
-        },
-      ],
-    };
+  {
+    title: 'Корзина',
+    id: 'cart',
+    alt: 'сумка с товарами',
   },
-};
+  {
+    title: 'Избранное',
+    id: 'favorites',
+    alt: 'сердечко',
+  },
+  {
+    title: 'Профиль',
+    id: 'profile',
+    alt: 'пользователь',
+  },
+];
 </script>
 
 <template>

@@ -1,18 +1,8 @@
-<script>
+<script setup>
 import spritePath from '@icons/search-panel/sprite.svg';
 import ButtonSVG from '@components/ButtonSVG.vue';
 
-export default {
-  components: {
-    ButtonSVG,
-  },
-  methods: {
-    importPath(id) {
-      return `${spritePath}#${id}`;
-    },
-  },
-};
-
+const importPath = (id) => `${spritePath}#${id}`;
 </script>
 
 <template>
