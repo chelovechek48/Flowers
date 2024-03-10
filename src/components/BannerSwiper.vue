@@ -7,22 +7,45 @@ import bannerImage from '@images/banner/букет-невест@1.25x.webp';
 
 const images = import.meta.glob('@images/banner/*.*');
 
-const obj = {
-  imageUrls: Object.keys(images).map((path) =>
+// const obj = {
+//   imageUrls: Object.keys(images).map((path, index) =>
+//     // Возвращаем результат динамического импорта изображения
+//     images[path]().then((module) => {
+//       console.log(module.default);
+//       slides[0].image = module.default;
+//       return module.default;
+//     })),
+// };
+// console.log(obj.imageUrls);
+
+const get = (index, p) => {
+  Object.keys(images).map((path) =>
     // Возвращаем результат динамического импорта изображения
-    images[path]().then((module) =>
-      // slides[0].image = module.default;
-      module.default)),
+    images[path]().then((module) => {
+      // console.log(module.default);
+      if (p === module.default) {
+        slides[index].image = module.default;
+      }
+    }));
 };
-console.log(images);
-console.log(obj.imageUrls);
+
+const url = (p) => {
+  const path = p.replace('@images', '/src/assets/images');
+  console.log(p);
+  console.log(path);
+  const filteredArray = Object.keys(images).find((num) => {
+    console.log(num);
+    return num === path;
+  });
+  return `/Flowers${filteredArray}`;
+};
 
 const slides = [
   {
     id: 1,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    image: '',
+    image: url('@images/banner/букет-невест@2x.jpg'),
     alt: 'букет состоящий из белых цветов',
   },
   {
