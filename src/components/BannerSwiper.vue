@@ -5,7 +5,7 @@ import 'swiper/css';
 
 import bannerImage from '@images/banner/букет-невест@1.25x.webp';
 
-const images = import.meta.glob('@images/banner/*.jpg');
+const images = import.meta.glob('@images/banner/*.webp');
 
 // const obj = {
 //   imageUrls: Object.keys(images).map((path) =>
