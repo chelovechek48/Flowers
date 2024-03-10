@@ -5,31 +5,24 @@ import 'swiper/css';
 
 import bannerImage from '@images/banner/букет-невест@1.25x.webp';
 
-let slides;
-const imported = (path) => {
-  import(path).then((image) => {
-    slides[0].image = image.default;
-    // console.log(image.default);
-    return image.default;
-  });
-};
-
 const images = import.meta.glob('@images/banner/*.jpg');
 
 const obj = {
   imageUrls: Object.keys(images).map((path) =>
     // Возвращаем результат динамического импорта изображения
-    images[path]().then((module) => module.default)),
+    images[path]().then((module) => {
+      slides[0].image = module.default;
+      return module.default;
+    })),
 };
-console.log(obj);
 
-slides = [
+const slides = [
   {
     id: 1,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    image: imported('/Flowers/src/assets/images/banner/букет-невест@1.25x.jpg'),
-    alt: 'букет состоящий из белых цветов',
+    image: obj.imageUrls[0],
+    alt: obj.imageUrls[0],
   },
   {
     id: 2,
