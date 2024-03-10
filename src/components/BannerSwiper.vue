@@ -7,13 +7,13 @@ import bannerImage from '@images/banner/букет-невест@1.25x.webp';
 
 const images = import.meta.glob('@images/banner/*.*');
 console.log(images['/src/assets/images/banner/букет-невест@1.25x.jpg']);
-console.log(images['/src/assets/images/banner/букет-невест@1.25x.jpg'].name);
 
-// const obj = {
-//   imageUrls: Object.keys(images).map((path) =>
-//     // Возвращаем результат динамического импорта изображения
-//     images[path]().then((module) => module.default)),
-// };
+const obj = {
+  imageUrls: Object.keys(images).map((path) =>
+    // Возвращаем результат динамического импорта изображения
+    images[path]().then((module) => module.default)),
+};
+console.log(obj.imageUrls);
 
 // const url = (p) => {
 //   const pp = p.replace('@images', '/Flowers/src/assets/images');
@@ -47,8 +47,8 @@ const slides = [
     id: 1,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    image: images['/src/assets/images/banner/букет-невест@1.25x.jpg'],
-    // image: '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp',
+    // image: images['/src/assets/images/banner/букет-невест@1.25x.jpg'],
+    image: '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp',
     // image: images['/Flowers/src/assets/images/banner/букет-невест@1.25x.webp'],
     alt: 'букет состоящий из белых цветов',
   },
@@ -116,7 +116,7 @@ const moveToSlide = (index) => {
       >
         <img
           class="image"
-          :src="slide.image()"
+          :src="slide.image"
           :alt="slide.alt"
         >
         <div
