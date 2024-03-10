@@ -12,23 +12,46 @@ const obj = {
     // Возвращаем результат динамического импорта изображения
     images[path]().then((module) => module.default)),
 };
+console.log(obj.imageUrls);
 
-const url = (p) => {
-  let temp = '';
-  const pp = p.replace('@images', '/Flowers/src/assets/images');
-  const filter = Object.keys(images).map((path) => images[path]().then((module) => {
-    console.log(module.default);
-    console.log(pp);
-    if (module.default === pp) {
-      temp = module.default;
-      slides[0].image = temp;
-      console.log(temp);
-    }
-    return module.default;
-  }));
-
-  return `/Flowers${temp}`;
+const url = async (path) => {
+  try {
+    const imagePaths = Object.keys((await images) || {});
+    const filter = imagePaths.find((image) => image === path);
+    console.log(Object.keys((await images)));
+    return filter;
+  } catch (error) {
+    console.error('Ошибка получения изображений:', error);
+    throw error;
+  }
 };
+
+url('/src/assets/images/banner/букет-невест@2x.jpg')
+  .then((foundImage) => {
+    console.log('Найденное изображение:', foundImage);
+  })
+  .catch((error) => {
+    console.error('Ошибка поиска изображения:', error);
+  });
+
+// const url = (path) => {
+//   const filter = images.find((image) => image === path);
+//   return filter;
+// };
+
+// const url = (p) => {
+//   const pp = p.replace('@images', '/Flowers/src/assets/images');
+//   const filter = Object.keys(images).find((path) => {
+//     console.log('');
+//     return images[path]().then((module) => {
+//       console.log(module.default);
+//       return module.default;
+//     });
+//   });
+//   console.log(`filter:${filter}`);
+
+//   return `/Flowers${filter}`;
+// };
 
 // const url = (p, i) => {
 //   const pp = p.replace('@images', '/Flowers/src/assets/images');
@@ -48,7 +71,8 @@ const slides = [
     id: 1,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    image: url('@images/banner/букет-невест@2x.jpg'),
+    // image: url('@images/banner/букет-невест@2x.jpg'),
+    image: '',
     alt: 'букет состоящий из белых цветов',
   },
   {
