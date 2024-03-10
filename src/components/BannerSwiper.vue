@@ -13,37 +13,34 @@ const obj = {
     images[path]().then((module) => module.default)),
 };
 
-// const url = (p) => {
-//   const pp = p.replace('@images', '/Flowers/src/assets/images');
-//   const filter = Object.keys(images).find((path) => images[path]().then((module) => {
-//     console.log(module.default);
-//     return module.default === pp;
-//   }));
-//   return `/Flowers${filter}`;
-// };
-
-const url = (p, i) => {
+const url = (p) => {
+  let temp = '';
   const pp = p.replace('@images', '/Flowers/src/assets/images');
-  const list = Object.keys(images).map((path) => images[path]().then((module) => {
-    console.log(module.default);
-    console.log(pp);
+  const filter = Object.keys(images).map((path) => images[path]().then((module) => {
+    // console.log(module.default);
     if (module.default === pp) {
-      slides[0].image = module.default;
+      temp = module.default;
+      slides[0].image = temp;
+      console.log(temp);
     }
-    return module.default === pp;
+    return module.default;
   }));
 
-  // const pp = p.replace('@images', '/Flowers/src/assets/images');
-  // const find = obj.imageUrls.find((path) => {
-  //   console.log(path);
-  //   path.then((module) => {
-  //     console.log(path);
-  //     return module === pp;
-  //   });
-  //   return '';
-  // });
-  // return find;
+  return `/Flowers${temp}`;
 };
+
+// const url = (p, i) => {
+//   const pp = p.replace('@images', '/Flowers/src/assets/images');
+//   const find = obj.imageUrls.find((path) => {
+//     console.log(path);
+//     path.then((module) => {
+//       console.log(path);
+//       return module === pp;
+//     });
+//     return '';
+//   });
+//   return find;
+// };
 
 const slides = [
   {
