@@ -6,7 +6,6 @@ import 'swiper/css';
 import bannerImage from '@images/banner/букет-невест@1.25x.webp';
 
 const images = import.meta.glob('@images/banner/*.*');
-console.log(images['/src/assets/images/banner/букет-невест@1.25x.jpg']);
 
 const obj = {
   imageUrls: Object.keys(images).map((path) =>
@@ -14,13 +13,16 @@ const obj = {
     images[path]().then((module) => module.default)),
 };
 const list = Object.keys(images).map((item) => {
-  images[item]().then((path) => {
-    console.log(path.default);
-    return path;
-  });
+  images[item]().then((path) => path);
   return item;
 });
 console.log(list);
+
+const listKeys = obj.imageUrls.map((item) => {
+  item.then((path) => path);
+  return item;
+});
+console.log(listKeys);
 
 // const url = (p) => {
 //   const pp = p.replace('@images', '/Flowers/src/assets/images');
