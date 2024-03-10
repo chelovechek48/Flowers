@@ -13,17 +13,19 @@ const obj = {
     images[path]().then((module) => module.default)),
 };
 
-const url = (p) => {
-  const pp = p.replace('@images', '/Flowers/src/assets/images');
-  const filter = Object.keys(images).find((path) => {
-    console.log(images);
-    return images[path]().then((module) => {
-      console.log(module.default);
-      return module.default === pp;
-    });
-  });
-  return `/Flowers${filter}`;
+// const url = (p) => {
+//   const pp = p.replace('@images', '/Flowers/src/assets/images');
+//   const filter = Object.keys(images).find((path) => images[path]().then((module) => {
+//     console.log(module.default);
+//     return module.default === pp;
+//   }));
+//   return `/Flowers${filter}`;
+// };
+
+const url = () => {
+  console.log(obj.imageUrls);
 };
+
 const slides = [
   {
     id: 1,
