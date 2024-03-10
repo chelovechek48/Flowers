@@ -22,10 +22,27 @@ const obj = {
 //   return `/Flowers${filter}`;
 // };
 
-const url = (p) => {
-  const find = Object.keys(images)[0];
-  console.log(find);
-  return `/Flowers${find}`;
+const url = (p, i) => {
+  const pp = p.replace('@images', '/Flowers/src/assets/images');
+  const list = Object.keys(images).map((path) => images[path]().then((module) => {
+    console.log(module.default);
+    console.log(pp);
+    if (module.default === pp) {
+      slides[0].image = module.default;
+    }
+    return module.default === pp;
+  }));
+
+  // const pp = p.replace('@images', '/Flowers/src/assets/images');
+  // const find = obj.imageUrls.find((path) => {
+  //   console.log(path);
+  //   path.then((module) => {
+  //     console.log(path);
+  //     return module === pp;
+  //   });
+  //   return '';
+  // });
+  // return find;
 };
 
 const slides = [
