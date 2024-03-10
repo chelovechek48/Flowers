@@ -22,8 +22,20 @@ const obj = {
 //   return `/Flowers${filter}`;
 // };
 
-const url = () => {
-  console.log(obj.imageUrls);
+const url = (p) => {
+  obj.imageUrls.map((promise) => {
+    promise.then((path) => {
+      console.log(path);
+    });
+  });
+  // const pp = p.replace('@images', '/Flowers/src/assets/images');
+  // const find = obj.imageUrls.find((path) => (
+  //   path.then((module) =>
+  //     // console.log(module);
+  //     // console.log(pp);
+  //     module === pp)
+  // ));
+  // return find;
 };
 
 const slides = [
