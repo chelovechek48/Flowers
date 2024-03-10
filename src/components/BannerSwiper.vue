@@ -13,17 +13,14 @@ const obj = {
     // Возвращаем результат динамического импорта изображения
     images[path]().then((module) => module.default)),
 };
-const list = obj.imageUrls.map((item) => {
-  item.then((path) => {
-    console.log(path);
+const list = Object.keys(images).map((item) => {
+  images[item]().then((path) => {
+    console.log(path.default);
     return path;
   });
   return item;
 });
 console.log(list);
-setTimeout(() => {
-  console.log(list);
-}, 100);
 
 // const url = (p) => {
 //   const pp = p.replace('@images', '/Flowers/src/assets/images');
