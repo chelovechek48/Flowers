@@ -45,35 +45,26 @@ const slides = [
     id: 1,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    // image: images['/src/assets/images/banner/букет-невест@1.25x.jpg'],
+    image: images['/src/assets/images/banner/букет-невест@1.25x.jpg'],
     // image: '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp',
-    image: (() => {
-      const imagePath = '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp';
-      const regex = /@([\w-]+)\./; // Регулярное выражение для поиска хеша перед последней точкой
-      const match = imagePath.match(regex);
-      const hash = match ? match[1] : ''; // Если хеш найден, берем его из совпадения, иначе присваиваем пустую строку
-      const updatedPath = imagePath.replace(regex, `@${hash}.`); // Заменяем хеш в пути
-
-      return updatedPath;
-    })(),
+    // image: images['/Flowers/src/assets/images/banner/букет-невест@1.25x.webp'],
     alt: 'букет состоящий из белых цветов',
   },
-  {
-    id: 2,
-    link: '#',
-    description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    // image: bannerImage,
-    image: '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp?import',
-    alt: 'букет состоящий из белых цветов',
-  },
-  {
-    id: 3,
-    link: '#',
-    description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    // image: bannerImage,
-    image: '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp?',
-    alt: 'букет состоящий из белых цветов',
-  },
+  // {
+  //   id: 2,
+  //   link: '#',
+  //   description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
+  //   image: bannerImage,
+  //   alt: 'букет состоящий из белых цветов',
+  // },
+  // {
+  //   id: 3,
+  //   link: '#',
+  //   description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
+  //   // image: bannerImage,
+  //   image: '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp?',
+  //   alt: 'букет состоящий из белых цветов',
+  // },
 ];
 
 const modules = [Autoplay];

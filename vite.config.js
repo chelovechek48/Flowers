@@ -9,7 +9,9 @@ export default defineConfig({
   server: {
     port: '8080',
   },
-  plugins: [vue()],
+  plugins: [vue({
+    assetsInclude: /\.(png|jpe?g|gif|svg|webp|mp4|ttf|woff2?|eot|ico|json|jsx?)\?import$/i, // Добавьте это свойство
+  })],
   resolve: {
     alias: [
       { find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) },
