@@ -7,25 +7,25 @@ import bannerImage from '@images/banner/букет-невест@1.25x.webp';
 
 const images = import.meta.glob('@images/banner/*.*');
 
-const obj = {
-  imageUrls: Object.keys(images).map((path) =>
-    // Возвращаем результат динамического импорта изображения
-    images[path]().then((module) => module.default)),
-};
+// const obj = {
+//   imageUrls: Object.keys(images).map((path) =>
+//     // Возвращаем результат динамического импорта изображения
+//     images[path]().then((module) => module.default)),
+// };
 
-const url = (p) => {
-  const pp = p.replace('@images', '/Flowers/src/assets/images');
-  const filter = Object.keys(images).find((path) => {
-    console.log('');
-    return images[path]().then((module) => {
-      console.log(module.default);
-      return module.default;
-    });
-  });
-  console.log(`filter:${filter}`);
+// const url = (p) => {
+//   const pp = p.replace('@images', '/Flowers/src/assets/images');
+//   const filter = Object.keys(images).find((path) => {
+//     console.log('');
+//     return images[path]().then((module) => {
+//       console.log(module.default);
+//       return module.default;
+//     });
+//   });
+//   console.log(`filter:${filter}`);
 
-  return `/Flowers${filter}`;
-};
+//   return `/Flowers${filter}`;
+// };
 
 // const url = (p, i) => {
 //   const pp = p.replace('@images', '/Flowers/src/assets/images');
@@ -45,22 +45,24 @@ const slides = [
     id: 1,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    // image: myFunction('@images/banner/букет-невест@2x.jpg'),
-    image: images['/src/assets/images/banner/букет-невест@1.25x.jpg'],
+    // image: images['/src/assets/images/banner/букет-невест@1.25x.jpg'],
+    image: '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp?import',
     alt: 'букет состоящий из белых цветов',
   },
   {
     id: 2,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    image: bannerImage,
+    // image: bannerImage,
+    image: '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp?hash',
     alt: 'букет состоящий из белых цветов',
   },
   {
     id: 3,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    image: bannerImage,
+    // image: bannerImage,
+    image: '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp?',
     alt: 'букет состоящий из белых цветов',
   },
 ];
