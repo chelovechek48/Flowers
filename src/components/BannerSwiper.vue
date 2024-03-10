@@ -16,13 +16,13 @@ const list = Object.keys(images).map((item) => {
   images[item]().then((path) => path);
   return item;
 });
-console.log(list);
+console.log(`Object.keys${list}`);
 
 const listKeys = obj.imageUrls.map((item) => {
   item.then((path) => path);
   return item;
 });
-console.log(listKeys);
+console.log(`imageUrls${listKeys}`);
 
 // const url = (p) => {
 //   const pp = p.replace('@images', '/Flowers/src/assets/images');
