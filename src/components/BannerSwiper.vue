@@ -9,10 +9,19 @@ let slides;
 const imported = (path) => {
   import(path).then((image) => {
     slides[0].image = image.default;
-    console.log('path');
+    // console.log(image.default);
     return image.default;
   });
 };
+
+const images = import.meta.glob('@images/banner/*.jpg');
+
+const obj = {
+  imageUrls: Object.keys(images).map((path) =>
+    // Возвращаем результат динамического импорта изображения
+    images[path]().then((module) => module.default)),
+};
+console.log(obj);
 
 slides = [
   {
