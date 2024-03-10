@@ -17,7 +17,8 @@ const url = (p) => {
   let temp = '';
   const pp = p.replace('@images', '/Flowers/src/assets/images');
   const filter = Object.keys(images).map((path) => images[path]().then((module) => {
-    // console.log(module.default);
+    console.log(module.default);
+    console.log(pp);
     if (module.default === pp) {
       temp = module.default;
       slides[0].image = temp;
