@@ -19,7 +19,7 @@ slides = [
     id: 1,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    image: imported('../assets/images/banner/букет-невест@1.25x.jpg'),
+    image: imported('/Flowers/src/assets/images/banner/букет-невест@1.25x.jpg'),
     alt: 'букет состоящий из белых цветов',
   },
   {
