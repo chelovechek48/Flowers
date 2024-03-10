@@ -7,39 +7,23 @@ import bannerImage from '@images/banner/букет-невест@1.25x.webp';
 
 const images = import.meta.glob('@images/banner/*.*');
 
-// const obj = {
-//   imageUrls: Object.keys(images).map((path, index) =>
-//     // Возвращаем результат динамического импорта изображения
-//     images[path]().then((module) => {
-//       console.log(module.default);
-//       slides[0].image = module.default;
-//       return module.default;
-//     })),
-// };
-// console.log(obj.imageUrls);
-
-const get = (index, p) => {
-  Object.keys(images).map((path) =>
+const obj = {
+  imageUrls: Object.keys(images).map((path) =>
     // Возвращаем результат динамического импорта изображения
-    images[path]().then((module) => {
-      // console.log(module.default);
-      if (p === module.default) {
-        slides[index].image = module.default;
-      }
-    }));
+    images[path]().then((module) => module.default)),
 };
 
 const url = (p) => {
-  const path = p.replace('@images', '/src/assets/images');
-  console.log(p);
-  console.log(path);
-  const filteredArray = Object.keys(images).find((num) => {
-    console.log(num);
-    return num === path;
+  const pp = p.replace('@images', '/Flowers/src/assets/images');
+  const filter = Object.keys(images).find((path) => {
+    console.log(images);
+    return images[path]().then((module) => {
+      console.log(module.default);
+      return module.default === pp;
+    });
   });
-  return `/Flowers${filteredArray}`;
+  return `/Flowers${filter}`;
 };
-
 const slides = [
   {
     id: 1,
