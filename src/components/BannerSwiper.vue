@@ -17,7 +17,7 @@ const images = import.meta.glob('@images/banner/*.webp');
 
 const get = () => {
   console.log(images);
-  return `/Flowers${images['/src/assets/images/banner/букет-невест@1.25x.jpg'].name}`;
+  return `/Flowers${images['/src/assets/images/banner/букет-невест@1.25x.webp'].name}`;
 };
 
 const slides = [
