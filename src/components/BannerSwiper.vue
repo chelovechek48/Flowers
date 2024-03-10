@@ -12,7 +12,7 @@ const obj = {
     // Возвращаем результат динамического импорта изображения
     images[path]().then((module) => module.default)),
 };
-console.log(Object.keys(images)[1]);
+console.log(obj.imageUrls);
 
 const url = async (path) => {
   try {
