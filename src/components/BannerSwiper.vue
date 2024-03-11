@@ -64,7 +64,7 @@ onMounted(async () => {
     const split = src.match(filenameRegex);
 
     const splitSrc = {
-      before: split[1],
+      before: split[1].split('/').pop(),
       after: split[2],
     };
     console.log(splitSrc);
