@@ -28,16 +28,17 @@ const url = (path, index) => {
   const p = path.replace('@images', '/Flowers/src/assets/images');
   obj.imageUrls.map((item) => {
     item.then((itemPath) => {
-      console.log(itemPath, item);
+      // console.log(itemPath, item);
       if (itemPath === p) {
-        slides[index] = itemPath;
+        slides[index].image = itemPath;
+        // console.log(`p${path}`);
       }
       return itemPath;
     });
-    return item;
   });
 
-  return p;
+  console.log(slides[index].image);
+  return slides[index].image;
 };
 
 // const url = (p) => {
