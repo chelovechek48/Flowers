@@ -6,7 +6,6 @@ import 'swiper/css';
 import bannerImage from '@images/banner/букет-невест@1.25x.webp';
 
 const images = import.meta.glob('@images/banner/*.*');
-const imagesList = {};
 
 // const obj = {
 //   imageUrls: Object.keys(images).map((path) => images[path]().then((module) => {
@@ -15,50 +14,28 @@ const imagesList = {};
 //   })),
 // };
 
-const getImages = () => {
-  Object.keys(images).map((path) => images[path]().then((module) => {
-    imagesList[module.default] = module.default;
-  }));
-  console.log(imagesList);
-};
-getImages();
-console.log(imagesList);
+// const imagesList = {};
+// Object.keys(images).map((image) => images[image]().then((module) => {
+//   imagesList[module.default] = module.default;
+//   console.log(imagesList);
+// }));
 
-const url = (pathAlias) => {
-  const path = pathAlias.replace('@images', '/Flowers/src/assets/images');
-  // obj.imageUrls.map((item) => {
-  //   item.then((itemPath) => {
-  //     // console.log(itemPath, item);
-  //     if (itemPath === p) {
-  //       slides[0].image = itemPath;
-  //       // console.log(`p${path}`);
-  //     }
-  //     return itemPath;
-  //   });
-  // });
-
-  // async function then(img) {
-  //   const response = await img.then((imgPath) => imgPath);
-  //   const data = await response;
-
-  //   console.log(data);
-  //   return data;
-  // }
-
-  // const find = obj.imageUrls.find((img) => {
-  //   then(img);
-  // });
-  // console.log('find:', find);
-
-  return path;
-};
+// const imagesList = {};
+// Promise.all(
+//   Object.keys(images).map((image) => images[image]().then((module) => {
+//     imagesList[module.default] = module.default;
+//   })),
+// ).then(() => {
+//   console.log(imagesList);
+// });
 
 const slides = [
   {
     id: 1,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    image: url('@images/banner/букет-невест@2x.jpg'),
+    // image: url('/Flowers/src/assets/images/banner/букет-невест@2x.jpg'),
+    image: '',
     alt: 'букет состоящий из белых цветов',
   },
   // {
@@ -77,6 +54,15 @@ const slides = [
   //   alt: 'букет состоящий из белых цветов',
   // },
 ];
+
+const fileName = '/src/assets/images/banner/букет-невест@2x.jpg';
+const imagePath = Object.keys(images).find((key) => {
+  console.log(key);
+  return key.includes(fileName);
+});
+console.log(images[imagePath]);
+console.log(images[imagePath].name);
+slides[0].image = `/Flowers${images[imagePath].name}`;
 
 const modules = [Autoplay];
 let currentSwiper;
