@@ -7,27 +7,22 @@ import bannerImage from '@images/banner/букет-невест@1.25x.webp';
 
 const images = import.meta.glob('@images/banner/*.*');
 
-// const obj = {
-//   imageUrls: Object.keys(images).map((path) => images[path]().then((module) => {
-//     imagesList[module.default] = module.default;
-//     return module.default;
-//   })),
-// };
+const imagesList = {};
+const obj = {
+  imageUrls: Object.keys(images).map((path) => images[path]().then((module) => {
+    imagesList[module.default] = module.default;
+    return module.default;
+  })),
+};
+console.log('obj', obj.imageUrls);
+console.log('images', images);
+// console.log(images['/Flowers/src/assets/images/banner/букет-невест@1.25x.jpg']);
 
 // const imagesList = {};
 // Object.keys(images).map((image) => images[image]().then((module) => {
 //   imagesList[module.default] = module.default;
 //   console.log(imagesList);
 // }));
-
-// const imagesList = {};
-// Promise.all(
-//   Object.keys(images).map((image) => images[image]().then((module) => {
-//     imagesList[module.default] = module.default;
-//   })),
-// ).then(() => {
-//   console.log(imagesList);
-// });
 
 const slides = [
   {
@@ -54,15 +49,6 @@ const slides = [
   //   alt: 'букет состоящий из белых цветов',
   // },
 ];
-
-const fileName = '/src/assets/images/banner/букет-невест@2x.jpg';
-const imagePath = Object.keys(images).find((key) => {
-  console.log(key);
-  return key.includes(fileName);
-});
-console.log(images[imagePath]);
-console.log(images[imagePath].name);
-slides[0].image = `/Flowers${images[imagePath].name}`;
 
 const modules = [Autoplay];
 let currentSwiper;
