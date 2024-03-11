@@ -30,21 +30,23 @@ const slides = [
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
     // image: url('/Flowers/src/assets/images/banner/букет-невест@2x.jpg'),
-    image: '123s',
+    image: '@images/banner/букет-невест@1.25x.webp',
     alt: 'букет состоящий из белых цветов',
   },
   {
     id: 2,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    image: bannerImage,
+    image: '@images/banner/букет-невест@1.25x.jpg',
+    // image: bannerImage,
     alt: 'букет состоящий из белых цветов',
   },
   {
     id: 3,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    image: bannerImage,
+    image: '@images/banner/букет-невест@2x.jpg',
+    // image: bannerImage,
     alt: 'букет состоящий из белых цветов',
   },
 ];
@@ -55,9 +57,12 @@ onMounted(async () => {
     return module.default;
   });
   const arr = await Promise.all(imagePaths);
-  console.log(arr);
-  slides[0].image = arr[2];
-  // console.log(slides[0].image);
+  slides.forEach((slide, index) => {
+    const src = slide.image.replace('@images', '/Flowers/src/assets/images');
+    const find = arr.find((path) => path === src);
+    slides[index].image = find;
+    console.log(find);
+  });
 });
 
 const modules = [Autoplay];
