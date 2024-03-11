@@ -61,6 +61,7 @@ onMounted(async () => {
     const src = slide.image.replace('@images', '/Flowers/src/assets/images');
     const find = arr.find((path) => path === src);
     slides[index].image = find;
+    console.log(arr);
     console.log(find);
   });
 });
