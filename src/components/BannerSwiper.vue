@@ -12,7 +12,7 @@ const slides = [
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
     image: {
       src: undefined,
-      localPath: '@images/banner/букет-невест@2x.jpgsss',
+      localPath: '@images/banner/букет-невест@2x.jpg',
       alt: 'букет состоящий из белых цветов',
     },
   },
