@@ -64,17 +64,16 @@ onMounted(async () => {
     const split = src.match(filenameRegex);
 
     const splitSrc = {
-      before: split[2],
-      after: split[1],
+      before: split[1],
+      after: split[2],
     };
-    // console.log(splitSrc);
+    console.log(splitSrc);
     const find = arr.find((path) => {
+      console.log(path.includes(splitSrc.before), path.includes(splitSrc.after), path);
       const isFind = (path.includes(splitSrc.before) && path.includes(splitSrc.after));
       return isFind;
     });
     slides[index].image = find;
-    // console.log(arr);
-    // console.log(find);
   });
 });
 
