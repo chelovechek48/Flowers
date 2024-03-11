@@ -59,10 +59,22 @@ onMounted(async () => {
   const arr = await Promise.all(imagePaths);
   slides.forEach((slide, index) => {
     const src = slide.image.replace('@images', '/Flowers/src/assets/images');
-    const find = arr.find((path) => path.includes(src));
+
+    const filenameRegex = /^(.+?)(\.[^.]+)?$/;
+    const split = src.match(filenameRegex);
+
+    const splitSrc = {
+      before: split[2],
+      after: split[1],
+    };
+    // console.log(splitSrc);
+    const find = arr.find((path) => {
+      const isFind = (path.includes(splitSrc.before) && path.includes(splitSrc.after));
+      return isFind;
+    });
     slides[index].image = find;
-    console.log(arr);
-    console.log(find);
+    // console.log(arr);
+    // console.log(find);
   });
 });
 
