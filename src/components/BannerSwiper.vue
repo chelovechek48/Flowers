@@ -2,27 +2,27 @@
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+import { onMounted } from 'vue';
 
 import bannerImage from '@images/banner/букет-невест@1.25x.webp';
 
 const images = import.meta.glob('@images/banner/*.*');
 
-const imagesList = {};
-const obj = {
-  imageUrls: Object.keys(images).map((path) => images[path]().then((module) => {
-    imagesList[module.default] = module.default;
-    return module.default;
-  })),
-};
-console.log('obj', obj.imageUrls);
-console.log('images', images);
-// console.log(images['/Flowers/src/assets/images/banner/букет-невест@1.25x.jpg']);
+// const imagePaths = Object.values(images).map(async (image) => {
+//   const module = await image();
+//   console.log(module);
+//   return module.default;
+// });
+// console.log('imagePaths:', imagePaths);
 
 // const imagesList = {};
-// Object.keys(images).map((image) => images[image]().then((module) => {
-//   imagesList[module.default] = module.default;
-//   console.log(imagesList);
-// }));
+// const obj = {
+//   imageUrls: Object.keys(images).map((path) => images[path]().then((module) => {
+//     imagesList[module.default] = module.default;
+//     return module.default;
+//   })),
+// };
+// console.log(obj.imageUrls);
 
 const slides = [
   {
@@ -30,25 +30,35 @@ const slides = [
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
     // image: url('/Flowers/src/assets/images/banner/букет-невест@2x.jpg'),
-    image: '',
+    image: '123s',
     alt: 'букет состоящий из белых цветов',
   },
-  // {
-  //   id: 2,
-  //   link: '#',
-  //   description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-  //   image: '@images/banner/букет-невест@1.25x.webp',
-  //   alt: 'букет состоящий из белых цветов',
-  // },
-  // {
-  //   id: 3,
-  //   link: '#',
-  //   description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-  //   // image: bannerImage,
-  //   image: '@images/banner/букет-невест@1.25x.jpg',
-  //   alt: 'букет состоящий из белых цветов',
-  // },
+  {
+    id: 2,
+    link: '#',
+    description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
+    image: bannerImage,
+    alt: 'букет состоящий из белых цветов',
+  },
+  {
+    id: 3,
+    link: '#',
+    description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
+    image: bannerImage,
+    alt: 'букет состоящий из белых цветов',
+  },
 ];
+
+onMounted(async () => {
+  const imagePaths = Object.values(images).map(async (image) => {
+    const module = await image();
+    return module.default;
+  });
+  const arr = await Promise.all(imagePaths);
+  console.log(arr);
+  slides[0].image = arr[2];
+  // console.log(slides[0].image);
+});
 
 const modules = [Autoplay];
 let currentSwiper;
