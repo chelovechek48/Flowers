@@ -109,7 +109,6 @@ onMounted(async () => {
           class="image"
           :src="slide.image.src"
           :alt="slide.image.alt"
-          loading="lazy"
         >
         <div
           class="swiper-lazy image"
