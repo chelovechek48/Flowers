@@ -4,133 +4,117 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { onMounted } from 'vue';
 
-import bannerImage from '@images/banner/букет-невест@1.25x.webp';
-
-const images = import.meta.glob('@images/banner/*.*');
-
-// const imagePaths = Object.values(images).map(async (image) => {
-//   const module = await image();
-//   console.log(module);
-//   return module.default;
-// });
-// console.log('imagePaths:', imagePaths);
-
-// const imagesList = {};
-// const obj = {
-//   imageUrls: Object.keys(images).map((path) => images[path]().then((module) => {
-//     imagesList[module.default] = module.default;
-//     return module.default;
-//   })),
-// };
-// console.log(obj.imageUrls);
+const modules = [Autoplay];
 
 const slides = [
   {
-    id: 1,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    // image: url('/Flowers/src/assets/images/banner/букет-невест@2x.jpg'),
-    image: '@images/banner/букет-невест@1.25x.webp',
-    alt: 'букет состоящий из белых цветов',
+    image: {
+      src: undefined,
+      localPath: '@images/banner/букет-невест@2x.jpgsss',
+      alt: 'букет состоящий из белых цветов',
+    },
   },
   {
-    id: 2,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    image: '@images/banner/букет-невест@1.25x.jpg',
-    // image: bannerImage,
-    alt: 'букет состоящий из белых цветов',
+    image: {
+      src: undefined,
+      localPath: '@images/banner/букет-невест@1.25x.webp',
+      alt: 'букет состоящий из белых цветов',
+    },
   },
   {
-    id: 3,
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    image: '@images/banner/букет-невест@2x.jpg',
-    // image: bannerImage,
-    alt: 'букет состоящий из белых цветов',
+    image: {
+      src: undefined,
+      localPath: '@images/banner/букет-невест@1.25x.jpg',
+      alt: 'букет состоящий из белых цветов',
+    },
   },
 ];
 
-onMounted(async () => {
-  const imagePaths = Object.values(images).map(async (image) => {
-    const module = await image();
-    return module.default;
-  });
-  const arr = await Promise.all(imagePaths);
-  slides.forEach((slide, index) => {
-    const src = slide.image.replace('@images', '/Flowers/src/assets/images');
-
-    const filenameRegex = /^(.+?)(\.[^.]+)?$/;
-    const split = src.match(filenameRegex);
-
-    const splitSrc = {
-      before: split[1].split('/').pop(),
-      after: split[2],
-    };
-    console.log(splitSrc);
-    const find = arr.find((path) => {
-      console.log(path.includes(splitSrc.before), path.includes(splitSrc.after), path);
-      const isFind = (path.includes(splitSrc.before) && path.includes(splitSrc.after));
-      return isFind;
-    });
-    slides[index].image = find;
-  });
-});
-
-const modules = [Autoplay];
 let currentSwiper;
-
 const initSwiper = (swiper) => {
   currentSwiper = swiper;
 };
+
 const swipeToStart = (swiper) => {
   const { activeIndex } = swiper;
-  if (activeIndex === swiper.slides.length - 1) {
+  const isLastSlide = (activeIndex === swiper.slides.length - 1);
+  if (isLastSlide) {
     swiper.slideTo(0);
   }
 };
-const moveToSlide = (index) => {
-  currentSwiper.slideTo(index);
-};
 
+onMounted(async () => {
+  const images = import.meta.glob('@images/banner/*.*');
+  const imagePaths = await Promise.all(
+    Object.values(images).map(async (image) => {
+      const module = await image();
+      return module.default;
+    }),
+  );
+  for (let i = 0; i < slides.length; i += 1) {
+    const src = slides[i].image.localPath.replace('@images', '/Flowers/src/assets/images');
+    const filenameRegex = /^(.+?)(\.[^.]+)?$/;
+    const filenameSplit = src.match(filenameRegex);
+    const filename = {
+      title: filenameSplit[1].split('/').pop(),
+      extension: filenameSplit[2],
+    };
+
+    const imageHashed = imagePaths.find((path) => {
+      const isEqual = (path.includes(filename.title) && path.includes(filename.extension));
+      return isEqual;
+    });
+    slides[i].image.src = imageHashed;
+  }
+  currentSwiper.slideNext(); currentSwiper.slidePrev();
+});
 </script>
 
 <template>
   <Swiper
     @swiper="initSwiper"
     @reachEnd="swipeToStart"
+    @focusin="currentSwiper.autoplay.stop()"
+    @focusout="currentSwiper.autoplay.start()"
     class="swiper"
     slides-per-view="auto"
     space-between="12"
     :lazy="true"
+    lazy-preload-prev-next="0"
 
     :modules="modules"
     :autoplay="{
       delay: 2500,
-      disableOnInteraction: true,
+      disableOnInteraction: false,
     }"
   >
     <Swiper-slide
       class="slide"
       v-for="(slide, index) in slides"
-      :key="slide.id"
+      :key="index"
     >
       <a
         class="link"
-        :id="slide.id"
-        @focus="moveToSlide(index)"
+        @focus="currentSwiper.slideTo(index)"
         :href="slide.link"
         :aria-label="slide.description + '. Перейти к акции'"
       >
         <img
           class="image"
-          :src="slide.image"
-          :alt="slide.alt"
+          :src="slide.image.src"
+          :alt="slide.image.alt"
+          loading="lazy"
         >
         <div
           class="swiper-lazy image"
-          :data-src="slide.image"
-          :alt="slide.alt"
+          :data-src="slide.image.src"
+          :alt="slide.image.alt"
         />
         <div class="swiper-lazy-preloader" />
       </a>
@@ -154,9 +138,10 @@ const moveToSlide = (index) => {
 .link {
   display: block;
   border-radius: 1rem;
-  overflow: hidden;
+  height: 100%;
 }
 .image {
   width: 100%;
+  border-radius: inherit;
 }
 </style>
