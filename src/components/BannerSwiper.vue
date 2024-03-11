@@ -59,7 +59,7 @@ onMounted(async () => {
   const arr = await Promise.all(imagePaths);
   slides.forEach((slide, index) => {
     const src = slide.image.replace('@images', '/Flowers/src/assets/images');
-    const find = arr.find((path) => path === src);
+    const find = arr.find((path) => path.includes(src));
     slides[index].image = find;
     console.log(arr);
     console.log(find);
