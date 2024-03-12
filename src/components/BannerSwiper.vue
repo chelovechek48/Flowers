@@ -11,12 +11,17 @@ const slides = [
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
     src: {
-      computed: ref(undefined),
-      avif: {
-        '1.25x': '@images/banner/букет-невест@1.25x.avif',
-        '2x': '@images/banner/букет-невест@2x.webp',
+      default: ref('@images/banner/букет-невест@1.25x.jpg'),
+      options: {
+        'image/avif': {
+          x1: ref('@images/banner/букет-невест@1.25x.avif'),
+          x2: ref('@images/banner/букет-невест@2x.avif'),
+        },
+        'image/webp': {
+          x1: ref('@images/banner/букет-невест@1.25x.webp'),
+          x2: ref('@images/banner/букет-невест@2x.webp'),
+        },
       },
-      default: '@images/banner/букет-невест@1.25x.jpg',
     },
     alt: 'букет состоящий из белых цветов',
   },
@@ -46,24 +51,48 @@ const initSwiper = (swiper) => {
         return module.default;
       }),
     );
+
     for (let i = 0; i < slides.length; i += 1) {
-      const hasComputed = slides[i].src.computed.value;
-      if (!hasComputed) {
-        const src = slides[i].src.default.replace('@images', '/Flowers/src/assets/images');
+      const replace = (img, type) => {
+        console.log(img);
+        const isLink = !(typeof img === 'object' && img !== null);
+        if (!isLink) {
+          const src = img.value.replace('@images', '/Flowers/src/assets/images');
 
-        const filenameRegex = /^(.+?)(\.[^.]+)?$/;
-        const filenameSplit = src.match(filenameRegex);
-        const filename = {
-          title: filenameSplit[1].split('/').pop(),
-          extension: filenameSplit[2],
-        };
+          const filenameRegex = /^(.+?)(\.[^.]+)?$/;
+          const filenameSplit = src.match(filenameRegex);
+          const filename = {
+            title: filenameSplit[1].split('/').pop(),
+            extension: filenameSplit[2],
+          };
 
-        const imageHashed = imagePaths.find((path) => {
-          const isEqual = (path.includes(filename.title) && path.includes(filename.extension));
-          return isEqual;
+          const imageHashed = imagePaths.find((path) => {
+            const isEqual = (path.includes(filename.title) && path.includes(filename.extension));
+            return isEqual;
+          });
+          if (typeof type === 'object' && type !== null) {
+            slides[i].src.options[type.type][type.size].value = imageHashed;
+          } else {
+            slides[i].src.default.value = imageHashed;
+          }
+        }
+      };
+
+      const options = Object.entries(slides[i].src.options);
+
+      options.forEach((option) => {
+        const imagesArray = Object.entries(option[1]);
+        imagesArray.forEach((image) => {
+          const type = {
+            type: option[0],
+            size: image[0],
+          };
+          replace(image[1], type);
         });
-        slides[i].src.computed.value = imageHashed;
-      }
+      });
+
+      const defaultImage = slides[i].src.default;
+      replace(defaultImage, 'default');
     }
   }());
 };
@@ -105,12 +134,16 @@ const swipeToStart = (swiper) => {
       :href="slide.link"
       :aria-label="slide.description + '. Перейти к акции'"
     >
-      <picture>
+      <picture class="image-wrapper">
         <source
           type="image/avif"
-          srcset="@images/banner/букет-невест@1.25x.avif"
+          :srcset="slide.src.options['image/avif']['x1'].value"
         >
-        <img src="@images/banner/букет-невест@1.25x.jpg">
+        <img
+          class="image"
+          :src="slide.src.default.value"
+          :alt="slide.alt"
+        >
       </picture>
       <!-- <img
         class="image"
@@ -141,6 +174,8 @@ const swipeToStart = (swiper) => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: inherit;
+  &, &-wrapper {
+    border-radius: inherit;
+  }
 }
 </style>
