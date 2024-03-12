@@ -24,9 +24,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          pathToImage: ['/src/assets/images/banner/букет-невест@2x.jpg'],
-        },
+        assetFileNames: 'assets/[name]-[hash][extname]',
       },
     },
   },
