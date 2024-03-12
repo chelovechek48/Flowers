@@ -25,7 +25,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          pathToImage: ['path/to/image.jpg'],
+          pathToImage: ['/src/assets/images/banner/букет-невест@2x.jpg'],
         },
       },
     },
