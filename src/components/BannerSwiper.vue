@@ -6,6 +6,7 @@ import 'swiper/css';
 
 const modules = [Autoplay];
 
+const pathToImage = '/Flowers/src/assets/images/banner/букет-невест@2x.jpg';
 const slides = [
   {
     link: '#',
@@ -105,7 +106,7 @@ const swipeToStart = (swiper) => {
       >
         <img
           class="image"
-          :src="'/Flowers/src/assets/images/banner/букет-невест@2x.jpg'"
+          :src="pathToImage"
           :alt="slide.alt"
           loading="lazy"
         >

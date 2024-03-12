@@ -24,7 +24,9 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        assetFileNames: 'assets/[name]-[hash][extname]',
+        manualChunks: {
+          pathToImage: ['path/to/image.jpg'],
+        },
       },
     },
   },
