@@ -10,12 +10,7 @@ const slides = [
   {
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    // src: '/Flowers/src/assets/images/banner/букет-невест@2x.jpg',
-    src: () => '/Flowers/src/assets/images/banner/букет-невест@2x.jpg',
-    // src: import('../assets/images/banner/букет-невест@2x.jpg').then((module) => {
-    //   console.log(module.default);
-    //   return module.default;
-    // }),
+    src: '/Flowers/src/assets/images/banner/букет-невест@2x.jpg',
     alt: 'букет состоящий из белых цветов',
   },
   // {
@@ -110,7 +105,7 @@ const swipeToStart = (swiper) => {
       >
         <img
           class="image"
-          :src="slide.src()"
+          :src="'/Flowers/src/assets/images/banner/букет-невест@2x.jpg'"
           :alt="slide.alt"
           loading="lazy"
         >
