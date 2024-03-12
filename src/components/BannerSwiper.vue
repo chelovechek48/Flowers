@@ -2,8 +2,7 @@
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay } from 'swiper/modules';
 import { ref } from 'vue';
-// import 'swiper/css';
-import 'swiper/swiper-bundle.css';
+import 'swiper/css';
 
 const modules = [Autoplay];
 
@@ -11,7 +10,7 @@ const slides = [
   {
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    src: { local: '@images/banner/букет-невест@2x.jpgs', computed: ref(undefined) },
+    src: { local: '@images/banner/букет-невест@2x.jpg', computed: ref(undefined) },
     alt: 'букет состоящий из белых цветов',
   },
   {
@@ -41,19 +40,22 @@ const initSwiper = (swiper) => {
       }),
     );
     for (let i = 0; i < slides.length; i += 1) {
-      const src = slides[i].src.local.replace('@images', '/Flowers/src/assets/images');
-      const filenameRegex = /^(.+?)(\.[^.]+)?$/;
-      const filenameSplit = src.match(filenameRegex);
-      const filename = {
-        title: filenameSplit[1].split('/').pop(),
-        extension: filenameSplit[2],
-      };
+      const img = !slides[i].src.computed.value;
+      if (img) {
+        const src = slides[i].src.local.replace('@images', '/Flowers/src/assets/images');
+        const filenameRegex = /^(.+?)(\.[^.]+)?$/;
+        const filenameSplit = src.match(filenameRegex);
+        const filename = {
+          title: filenameSplit[1].split('/').pop(),
+          extension: filenameSplit[2],
+        };
 
-      const imageHashed = imagePaths.find((path) => {
-        const isEqual = (path.includes(filename.title) && path.includes(filename.extension));
-        return isEqual;
-      });
-      slides[i].src.computed.value = imageHashed;
+        const imageHashed = imagePaths.find((path) => {
+          const isEqual = (path.includes(filename.title) && path.includes(filename.extension));
+          return isEqual;
+        });
+        slides[i].src.computed.value = imageHashed;
+      }
     }
   }());
 };
@@ -69,13 +71,14 @@ const swipeToStart = (swiper) => {
 
 <template>
   <Swiper
+    class="swiper"
     @swiper="initSwiper"
     @reachEnd="swipeToStart"
     @focusin="currentSwiper.autoplay.stop()"
     @focusout="currentSwiper.autoplay.start()"
-    class="swiper"
     slides-per-view="auto"
     space-between="12"
+    :lazy-preload-prev-next="5"
 
     :modules="modules"
     :autoplay="{
@@ -95,12 +98,11 @@ const swipeToStart = (swiper) => {
         :aria-label="slide.description + '. Перейти к акции'"
       >
         <img
-          class="image swiper-lazy"
+          class="image"
           :src="slide.src.computed.value"
           :alt="slide.alt"
           loading="lazy"
         >
-        <div class="swiper-lazy-preloader" />
       </a>
     </Swiper-slide>
   </Swiper>
@@ -126,6 +128,8 @@ const swipeToStart = (swiper) => {
 }
 .image {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: inherit;
 }
 </style>
