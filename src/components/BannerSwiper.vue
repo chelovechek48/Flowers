@@ -2,7 +2,8 @@
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay } from 'swiper/modules';
 import { ref } from 'vue';
-import 'swiper/css';
+// import 'swiper/css';
+import 'swiper/swiper-bundle.css';
 
 const modules = [Autoplay];
 
@@ -10,19 +11,19 @@ const slides = [
   {
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    imageSrc: ref('@images/banner/букет-невест@2x.jpg'),
+    src: { local: '@images/banner/букет-невест@2x.jpgs', computed: ref(undefined) },
     alt: 'букет состоящий из белых цветов',
   },
   {
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    imageSrc: ref('@images/banner/букет-невест@2x.jpg'),
+    src: { local: '@images/banner/букет-невест@1.25x.webp', computed: ref(undefined) },
     alt: 'букет состоящий из белых цветов',
   },
   {
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-    imageSrc: ref('@images/banner/букет-невест@2x.jpg'),
+    src: { local: '@images/banner/букет-невест@1.25x.jpg', computed: ref(undefined) },
     alt: 'букет состоящий из белых цветов',
   },
 ];
@@ -40,7 +41,7 @@ const initSwiper = (swiper) => {
       }),
     );
     for (let i = 0; i < slides.length; i += 1) {
-      const src = slides[i].imageSrc.value.replace('@images', '/Flowers/src/assets/images');
+      const src = slides[i].src.local.replace('@images', '/Flowers/src/assets/images');
       const filenameRegex = /^(.+?)(\.[^.]+)?$/;
       const filenameSplit = src.match(filenameRegex);
       const filename = {
@@ -52,7 +53,7 @@ const initSwiper = (swiper) => {
         const isEqual = (path.includes(filename.title) && path.includes(filename.extension));
         return isEqual;
       });
-      slides[i].imageSrc.value = imageHashed;
+      slides[i].src.computed.value = imageHashed;
     }
   }());
 };
@@ -75,12 +76,11 @@ const swipeToStart = (swiper) => {
     class="swiper"
     slides-per-view="auto"
     space-between="12"
-    :lazy="true"
 
     :modules="modules"
     :autoplay="{
       delay: 2500,
-      disableOnInteraction: false,
+      disableOnInteraction: true,
     }"
   >
     <Swiper-slide
@@ -95,15 +95,11 @@ const swipeToStart = (swiper) => {
         :aria-label="slide.description + '. Перейти к акции'"
       >
         <img
-          class="image"
-          :src="slide.imageSrc.value"
+          class="image swiper-lazy"
+          :src="slide.src.computed.value"
           :alt="slide.alt"
+          loading="lazy"
         >
-        <div
-          class="swiper-lazy image"
-          :data-src="slide.imageSrc.value"
-          :alt="slide.alt"
-        />
         <div class="swiper-lazy-preloader" />
       </a>
     </Swiper-slide>
