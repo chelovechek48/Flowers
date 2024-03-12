@@ -9,9 +9,7 @@ export default defineConfig({
   server: {
     port: '8080',
   },
-  plugins: [vue({
-    assetsInclude: /\.(png|jpe?g|gif|svg|webp|mp4|ttf|woff2?|eot|ico|json|jsx?)\?import$/i, // Добавьте это свойство
-  })],
+  plugins: [vue()],
   resolve: {
     alias: [
       { find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) },
@@ -22,5 +20,12 @@ export default defineConfig({
       { find: '@styles', replacement: fileURLToPath(new URL('./src/styles', import.meta.url)) },
       { find: '@vars', replacement: fileURLToPath(new URL('./src/styles/vars', import.meta.url)) },
     ],
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+      },
+    },
   },
 });
