@@ -4,97 +4,84 @@ import { Autoplay } from 'swiper/modules';
 import { ref } from 'vue';
 import 'swiper/css';
 
+import SrcToPicture from '@components/SrcToPicture.vue';
+
 const modules = [Autoplay];
 
+const images = import.meta.glob('@images/banner/*.*');
 const slides = [
   {
     link: '#',
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
     src: {
-      default: ref('@images/banner/букет-невест@1.25x.jpg'),
-      options: {
-        'image/avif': {
-          x1: ref('@images/banner/букет-невест@1.25x.avif'),
-          x2: ref('@images/banner/букет-невест@2x.avif'),
-        },
-        'image/webp': {
-          x1: ref('@images/banner/букет-невест@1.25x.webp'),
-          x2: ref('@images/banner/букет-невест@2x.webp'),
-        },
+      'image/avif': {
+        '1x': ref('/Flowers/src/assets/images/banner/букет-невест@1.25x.avif'),
+        '2x': 'https://w.forfun.com/fetch/da/daf8eb568fea522f6701fb9c66378cdc.jpeg',
+      },
+      'image/webp': {
+        '1x': ref('@images/banner/букет-невест@1.25x.webp'),
+        '2x': ref('@images/banner/букет-невест@2x.webp'),
+      },
+      'image/jpeg': {
+        '1x': ref('@images/banner/букет-невест@1.25x.jpg'),
+        '2x': ref('@images/banner/букет-невест@2x.jpg'),
+      },
+      default: {
+        '1x': ref('@images/banner/букет-невест@1.25x.jpg'),
       },
     },
     alt: 'букет состоящий из белых цветов',
   },
-  // {
-  //   link: '#',
-  //   description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-  //   src: { local: '@images/banner/букет-невест@1.25x.webp', computed: ref(undefined) },
-  //   alt: 'букет состоящий из белых цветов',
-  // },
-  // {
-  //   link: '#',
-  //   description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
-  //   src: { local: '@images/banner/букет-невест@1.25x.jpg', computed: ref(undefined) },
-  //   alt: 'букет состоящий из белых цветов',
-  // },
+  {
+    link: '#',
+    description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
+    src: {
+      'image/avif': {
+        '1x': ref('/Flowers/src/assets/images/banner/букет-невест@1.25x.avif'),
+        '2x': 'https://w.forfun.com/fetch/da/daf8eb568fea522f6701fb9c66378cdc.jpeg',
+      },
+      'image/webp': {
+        '1x': ref('@images/banner/букет-невест@1.25x.webp'),
+        '2x': ref('@images/banner/букет-невест@2x.webp'),
+      },
+      'image/jpeg': {
+        '1x': ref('@images/banner/букет-невест@1.25x.jpg'),
+        '2x': ref('@images/banner/букет-невест@2x.jpg'),
+      },
+      default: {
+        '1x': ref('@images/banner/букет-невест@1.25x.jpg'),
+      },
+    },
+    alt: 'букет состоящий из белых цветов',
+  },
+  {
+    link: '#',
+    description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
+    src: {
+      'image/avif': {
+        '1x': ref('/Flowers/src/assets/images/banner/букет-невест@1.25x.avif'),
+        '2x': 'https://w.forfun.com/fetch/da/daf8eb568fea522f6701fb9c66378cdc.jpeg',
+      },
+      'image/webp': {
+        '1x': ref('@images/banner/букет-невест@1.25x.webp'),
+        '2x': ref('@images/banner/букет-невест@2x.webp'),
+      },
+      'image/jpeg': {
+        '1x': ref('@images/banner/букет-невест@1.25x.jpg'),
+        '2x': ref('@images/banner/букет-невест@2x.jpg'),
+      },
+      default: {
+        '1x': ref('@images/banner/букет-невест@1.25x.jpg'),
+      },
+    },
+    alt: 'букет состоящий из белых цветов',
+  },
 ];
 
 let currentSwiper;
 
 const initSwiper = (swiper) => {
   currentSwiper = swiper;
-  (async function getImagesCollection() {
-    const images = import.meta.glob('@images/banner/*.*');
-    const imagePaths = await Promise.all(
-      Object.values(images).map(async (image) => {
-        const module = await image();
-        return module.default;
-      }),
-    );
-
-    for (let i = 0; i < slides.length; i += 1) {
-      const replace = (img, type) => {
-        console.log(img);
-        const isLink = !(typeof img === 'object' && img !== null);
-        if (!isLink) {
-          const src = img.value.replace('@images', '/Flowers/src/assets/images');
-
-          const filenameRegex = /^(.+?)(\.[^.]+)?$/;
-          const filenameSplit = src.match(filenameRegex);
-          const filename = {
-            title: filenameSplit[1].split('/').pop(),
-            extension: filenameSplit[2],
-          };
-
-          const imageHashed = imagePaths.find((path) => {
-            const isEqual = (path.includes(filename.title) && path.includes(filename.extension));
-            return isEqual;
-          });
-          if (typeof type === 'object' && type !== null) {
-            slides[i].src.options[type.type][type.size].value = imageHashed;
-          } else {
-            slides[i].src.default.value = imageHashed;
-          }
-        }
-      };
-
-      const options = Object.entries(slides[i].src.options);
-
-      options.forEach((option) => {
-        const imagesArray = Object.entries(option[1]);
-        imagesArray.forEach((image) => {
-          const type = {
-            type: option[0],
-            size: image[0],
-          };
-          replace(image[1], type);
-        });
-      });
-
-      const defaultImage = slides[i].src.default;
-      replace(defaultImage, 'default');
-    }
-  }());
 };
 
 const swipeToStart = (swiper) => {
@@ -134,23 +121,12 @@ const swipeToStart = (swiper) => {
       :href="slide.link"
       :aria-label="slide.description + '. Перейти к акции'"
     >
-      <picture class="image-wrapper">
-        <source
-          type="image/avif"
-          :srcset="slide.src.options['image/avif']['x1'].value"
-        >
-        <img
-          class="image"
-          :src="slide.src.default.value"
-          :alt="slide.alt"
-        >
-      </picture>
-      <!-- <img
-        class="image"
-        :src="slide.src.computed.value"
-        :alt="slide.alt"
-        loading="lazy"
-      > -->
+      <SrcToPicture
+        class="image-wrapper"
+        :slide-src="slide.src"
+        :slide-alt="slide.alt"
+        :images="images"
+      />
       <div class="swiper-lazy-preloader" />
     </Swiper-slide>
   </Swiper>
@@ -170,12 +146,10 @@ const swipeToStart = (swiper) => {
   object-fit: cover;
   border-radius: 1rem;
 }
-.image {
+.image-wrapper {
+  border-radius: inherit;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  &, &-wrapper {
-    border-radius: inherit;
-  }
 }
 </style>
