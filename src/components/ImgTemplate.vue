@@ -2,6 +2,10 @@
 import { defineProps } from 'vue';
 
 const props = defineProps({
+  imagesCatalogPath: {
+    type: String,
+    required: true,
+  },
   slideImagesPath: {
     type: Object,
     required: true,
@@ -33,7 +37,7 @@ const sourcesCollectionArray = imagesCollectionArray.filter((source) => source[0
   const setImagesUrl = (image, option) => {
     const isLink = !(typeof image === 'object' && image !== null);
     if (!isLink) {
-      const patht = image.value.replace('@images', '/Flowers/src/assets/images');
+      const patht = image.value.replace('@images', props.imagesCatalogPath);
 
       const filenameRegex = /^(.+?)(\.[^.]+)?$/;
       const filenameSplit = patht.match(filenameRegex);
@@ -102,7 +106,7 @@ const getSet = (set) => {
     <img
       v-if="imagesCollectionHasParsed"
       class="image"
-      :src="urlValidate(imagesCollectionObject['default']['1x'].value)"
+      :src="urlValidate(imagesCollectionObject['default']['1x'])"
       :alt="alt"
       loading="lazy"
     >

@@ -123,6 +123,7 @@ const swipeToStart = (swiper) => {
     >
       <ImgTemplate
         class="image-wrapper"
+        images-catalog-path="/Flowers/src/assets/images"
         :slide-images-path="images"
         :slide-src="slide.src"
         :alt="slide.alt"
