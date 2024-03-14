@@ -95,7 +95,6 @@ const swipeToStart = (swiper) => {
 
 <template>
   <Swiper
-    tag="aside"
     class="swiper"
     @swiper="initSwiper"
     @reachEnd="swipeToStart"
