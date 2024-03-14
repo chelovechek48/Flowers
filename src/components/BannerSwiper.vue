@@ -37,8 +37,8 @@ const slides = [
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
     src: {
       'image/avif': {
-        '1x': ref('/Flowers/src/assets/images/banner/букет-невест@1.25x.avif'),
-        '2x': 'https://w.forfun.com/fetch/da/daf8eb568fea522f6701fb9c66378cdc.jpeg',
+        '1x': ref('@images/banner/букет-невест@1.25x.avif'),
+        '2x': ref('@images/banner/букет-невест@2x.avif'),
       },
       'image/webp': {
         '1x': ref('@images/banner/букет-невест@1.25x.webp'),
@@ -59,8 +59,8 @@ const slides = [
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
     src: {
       'image/avif': {
-        '1x': ref('/Flowers/src/assets/images/banner/букет-невест@1.25x.avif'),
-        '2x': 'https://w.forfun.com/fetch/da/daf8eb568fea522f6701fb9c66378cdc.jpeg',
+        '1x': ref('@images/banner/букет-невест@1.25x.avif'),
+        '2x': ref('@images/banner/букет-невест@2x.avif'),
       },
       'image/webp': {
         '1x': ref('@images/banner/букет-невест@1.25x.webp'),
