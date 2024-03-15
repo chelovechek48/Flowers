@@ -5,10 +5,10 @@
     "price": 3000,
     "src": {
       "image/jpeg": {
-        "1x": "/Flowers/src/assets/images//products/букет-красотка@2x.jpg"
+        "1x": "/Flowers/src/assets/images/products/букет-красотка@2x.jpg"
       },
       "default": {
-        "1x": "/Flowers/src/assets/images//products/букет-красотка@1.25x.jpg"
+        "1x": "/Flowers/src/assets/images/products/букет-красотка@1.25x.jpg"
       }
     },
     "alt": "Авторский букет 'Кросотка'"
@@ -19,10 +19,10 @@
     "price": 3000,
     "src": {
       "image/jpeg": {
-        "1x": "/Flowers/src/assets/images//products/букет-красотка@2x.jpg"
+        "1x": "/Flowers/src/assets/images/products/букет-красотка@2x.jpg"
       },
       "default": {
-        "1x": "/Flowers/src/assets/images//products/букет-красотка@1.25x.jpg"
+        "1x": "/Flowers/src/assets/images/products/букет-красотка@1.25x.jpg"
       }
     },
     "alt": "Авторский букет 'Кросотка'"
@@ -33,10 +33,10 @@
     "price": 3000,
     "src": {
       "image/jpeg": {
-        "1x": "/Flowers/src/assets/images//products/букет-красотка@2x.jpg"
+        "1x": "/Flowers/src/assets/images/products/букет-красотка@2x.jpg"
       },
       "default": {
-        "1x": "/Flowers/src/assets/images//products/букет-красотка@1.25x.jpg"
+        "1x": "/Flowers/src/assets/images/products/букет-красотка@1.25x.jpg"
       }
     },
     "alt": "Авторский букет 'Кросотка'"
@@ -47,38 +47,10 @@
     "price": 3000,
     "src": {
       "image/jpeg": {
-        "1x": "/Flowers/src/assets/images//products/букет-красотка@2x.jpg"
+        "1x": "/Flowers/src/assets/images/products/букет-красотка@2x.jpg"
       },
       "default": {
-        "1x": "/Flowers/src/assets/images//products/букет-красотка@1.25x.jpg"
-      }
-    },
-    "alt": "Авторский букет 'Кросотка'"
-  },
-  {
-    "link": "#",
-    "title": "Авторский букет 'Кросотка'",
-    "price": 3000,
-    "src": {
-      "image/jpeg": {
-        "1x": "/Flowers/src/assets/images//products/букет-красотка@2x.jpg"
-      },
-      "default": {
-        "1x": "/Flowers/src/assets/images//products/букет-красотка@1.25x.jpg"
-      }
-    },
-    "alt": "Авторский букет 'Кросотка'"
-  },
-  {
-    "link": "#",
-    "title": "Авторский букет 'Кросотка'",
-    "price": 3000,
-    "src": {
-      "image/jpeg": {
-        "1x": "/Flowers/src/assets/images//products/букет-красотка@2x.jpg"
-      },
-      "default": {
-        "1x": "/Flowers/src/assets/images//products/букет-красотка@1.25x.jpg"
+        "1x": "/Flowers/src/assets/images/products/букет-красотка@1.25x.jpg"
       }
     },
     "alt": "Авторский букет 'Кросотка'"

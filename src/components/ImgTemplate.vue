@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
 
 const props = defineProps({
   slideImagesPath: {
@@ -16,8 +16,8 @@ const props = defineProps({
   },
 });
 
-const imagesCollectionObject = props.slideSrc;
-const imagesCollectionArray = Object.entries(imagesCollectionObject);
+const imagesCollectionObject = ref(props.slideSrc);
+const imagesCollectionArray = Object.entries(imagesCollectionObject.value);
 const sourcesCollectionArray = imagesCollectionArray.filter((source) => source[0] !== 'default');
 
 (async function getImagesCollectionObject() {
@@ -38,18 +38,16 @@ const sourcesCollectionArray = imagesCollectionArray.filter((source) => source[0
       extension: filenameSplit[2],
     };
 
-    console.log(imagesPath);
     const imageUrl = imagesPath.find((path) => {
       const isEqual = (path.includes(filename.title) && path.includes(filename.extension));
       return isEqual;
     });
-    console.log(imageUrl);
 
     const isObject = (typeof option === 'object' && option !== null);
     if (isObject) {
-      imagesCollectionObject[option.type][option.size] = imageUrl;
+      imagesCollectionObject.value[option.type][option.size] = imageUrl;
     } else {
-      imagesCollectionObject.default = imageUrl;
+      imagesCollectionObject.value.default = imageUrl;
     }
   };
 
