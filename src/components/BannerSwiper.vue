@@ -15,19 +15,19 @@ const slides = [
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
     src: {
       'image/avif': {
-        '1x': '/Flowers/src/assets/images/banner/букет-невест@1.25x.avif',
-        '2x': '/Flowers/src/assets/images/banner/букет-невест@2x.avif',
+        '1x': '@images/banner/букет-невест@1.25x.avif',
+        '2x': '@images/banner/букет-невест@2x.avif',
       },
       'image/webp': {
-        '1x': '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp',
-        '2x': '/Flowers/src/assets/images/banner/букет-невест@2x.webp',
+        '1x': '@images/banner/букет-невест@1.25x.webp',
+        '2x': '@images/banner/букет-невест@2x.webp',
       },
       'image/jpeg': {
-        '1x': '/Flowers/src/assets/images/banner/букет-невест@1.25x.jpg',
-        '2x': '/Flowers/src/assets/images/banner/букет-невест@2x.jpg',
+        '1x': '@images/banner/букет-невест@1.25x.jpg',
+        '2x': '@images/banner/букет-невест@2x.jpg',
       },
       default: {
-        '1x': '/Flowers/src/assets/images/banner/букет-невест@1.25x.jpg',
+        '1x': '@images/banner/букет-невест@1.25x.jpg',
       },
     },
     alt: 'букет состоящий из белых цветов',
@@ -37,19 +37,19 @@ const slides = [
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
     src: {
       'image/avif': {
-        '1x': '/Flowers/src/assets/images/banner/букет-невест@1.25x.avif',
-        '2x': '/Flowers/src/assets/images/banner/букет-невест@2x.avif',
+        '1x': '@images/banner/букет-невест@1.25x.avif',
+        '2x': '@images/banner/букет-невест@2x.avif',
       },
       'image/webp': {
-        '1x': '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp',
-        '2x': '/Flowers/src/assets/images/banner/букет-невест@2x.webp',
+        '1x': '@images/banner/букет-невест@1.25x.webp',
+        '2x': '@images/banner/букет-невест@2x.webp',
       },
       'image/jpeg': {
-        '1x': '/Flowers/src/assets/images/banner/букет-невест@1.25x.jpg',
-        '2x': '/Flowers/src/assets/images/banner/букет-невест@2x.jpg',
+        '1x': '@images/banner/букет-невест@1.25x.jpg',
+        '2x': '@images/banner/букет-невест@2x.jpg',
       },
       default: {
-        '1x': '/Flowers/src/assets/images/banner/букет-невест@1.25x.jpg',
+        '1x': '@images/banner/букет-невест@1.25x.jpg',
       },
     },
     alt: 'букет состоящий из белых цветов',
@@ -59,19 +59,19 @@ const slides = [
     description: 'Дарим подставку на "букет невест", период проведения акции с 29 августа по первое сентября',
     src: {
       'image/avif': {
-        '1x': '/Flowers/src/assets/images/banner/букет-невест@1.25x.avif',
-        '2x': '/Flowers/src/assets/images/banner/букет-невест@2x.avif',
+        '1x': '@images/banner/букет-невест@1.25x.avif',
+        '2x': '@images/banner/букет-невест@2x.avif',
       },
       'image/webp': {
-        '1x': '/Flowers/src/assets/images/banner/букет-невест@1.25x.webp',
-        '2x': '/Flowers/src/assets/images/banner/букет-невест@2x.webp',
+        '1x': '@images/banner/букет-невест@1.25x.webp',
+        '2x': '@images/banner/букет-невест@2x.webp',
       },
       'image/jpeg': {
-        '1x': '/Flowers/src/assets/images/banner/букет-невест@1.25x.jpg',
-        '2x': '/Flowers/src/assets/images/banner/букет-невест@2x.jpg',
+        '1x': '@images/banner/букет-невест@1.25x.jpg',
+        '2x': '@images/banner/букет-невест@2x.jpg',
       },
       default: {
-        '1x': '/Flowers/src/assets/images/banner/букет-невест@1.25x.jpg',
+        '1x': '@images/banner/букет-невест@1.25x.jpg',
       },
     },
     alt: 'букет состоящий из белых цветов',
@@ -147,7 +147,6 @@ const keyboardDisable = () => {
         :slide-src="slide.src"
         :alt="slide.alt"
       />
-      <div class="swiper-lazy-preloader" />
     </Swiper-slide>
   </Swiper>
 </template>

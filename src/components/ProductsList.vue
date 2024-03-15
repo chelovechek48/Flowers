@@ -64,6 +64,7 @@ const keyboardDisable = () => {
       space-between="12"
       :direction="props.direction"
       :loop="true"
+      :lazy-preload-prev-next="5"
 
       @swiper="initSwiper"
       @slideChangeTransitionStart="change"
@@ -91,7 +92,6 @@ const keyboardDisable = () => {
           :slide-src="item.src"
           :alt="item.alt"
         />
-        <div class="swiper-lazy-preloader" />
         <header class="card__title">
           {{ item.title }}
         </header>

@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 import BannerSwiper from '@components/BannerSwiper.vue';
 import ProductsList from '@components/ProductsList.vue';
 
@@ -11,17 +10,17 @@ import products from '@/assets/data/products.json';
     class="first-screen"
     tabindex="-1"
   >
-    <!-- <BannerSwiper /> -->
+    <BannerSwiper />
     <ProductsList
       title="Популярные товары"
       direction="horizontal"
       :items="products"
     />
-    <!-- <ProductsList
+    <ProductsList
       title="Букеты со скидкой"
       direction="horizontal"
       :items="products"
-    /> -->
+    />
   </main>
 </template>
 
