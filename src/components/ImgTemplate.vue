@@ -38,10 +38,12 @@ const sourcesCollectionArray = imagesCollectionArray.filter((source) => source[0
       extension: filenameSplit[2],
     };
 
+    console.log(imagesPath);
     const imageUrl = imagesPath.find((path) => {
       const isEqual = (path.includes(filename.title) && path.includes(filename.extension));
       return isEqual;
     });
+    console.log(imageUrl);
 
     const isObject = (typeof option === 'object' && option !== null);
     if (isObject) {
