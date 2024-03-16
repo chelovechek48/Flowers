@@ -1,5 +1,5 @@
 <script setup>
-import ProductsList from '@components/SliderTemplate.vue';
+import SliderTemplate from '@components/SliderTemplate.vue';
 
 import banners from '@/assets/data/banners.json';
 import products from '@/assets/data/products.json';
@@ -13,18 +13,18 @@ const imagesProducts = import.meta.glob('@images/products/*.*');
     class="first-screen"
     tabindex="-1"
   >
-    <ProductsList
+    <SliderTemplate
       :images="{ path: imagesBanners, list: banners }"
       :slide-elements="[ 'image' ]"
       :slide-size="{ width: '20rem', aspectRatio: '398/225' }"
     />
-    <ProductsList
+    <SliderTemplate
       title="Популярные товары"
       :images="{ path: imagesProducts, list: products }"
       :slide-elements="[ 'image', 'title', 'price']"
       :slide-size="{ width: '12rem', aspectRatio: '1' }"
     />
-    <ProductsList
+    <SliderTemplate
       title="Букеты со скидкой"
       :items="products"
       :images="{ path: imagesProducts, list: products }"
