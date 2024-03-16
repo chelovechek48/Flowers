@@ -95,7 +95,7 @@ const keyboardDisable = () => {
       tag="a"
       :style="`
         width: min(90%, ${props.slideSize.width});
-        aspect-ratio: min(90%, ${props.slideSize.aspectRatio});`"
+        aspect-ratio: ${props.slideSize.aspectRatio};`"
       :href="item.link"
       :aria-label="item.description"
       :tabindex="-1"
@@ -144,7 +144,7 @@ const keyboardDisable = () => {
     font-size: 1.6rem;
     font-weight: 400;
     margin-bottom: 1rem;
-}
+  }
 }
 
 .slide {
@@ -162,14 +162,22 @@ const keyboardDisable = () => {
     font-size: 1.25rem;
     margin-block: 0.75rem;
   }
+
   &__button {
     font-size: 1.25rem;
     color: colors.$pink;
     padding: 0.5rem 1rem;
     box-shadow: 0 0 0 1px colors.$pink;
     border-radius: 0.5rem 1rem;
+    transition: 200ms ease;
+
+    &:hover {
+      color: #fff;
+      background-color: colors.$pink;
+    }
   }
 }
+
 .image-wrapper {
   width: 100%;
   height: 100%;

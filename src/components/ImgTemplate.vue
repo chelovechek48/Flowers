@@ -100,7 +100,6 @@ const getSrcSet = (set) => {
 .image {
   aspect-ratio: inherit;
   width: inherit;
-  max-width: inherit;
   height: inherit;
   object-fit: inherit;
   border-radius: inherit;

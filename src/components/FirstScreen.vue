@@ -1,5 +1,5 @@
 <script setup>
-import ProductsList from '@components/ProductsList.vue';
+import ProductsList from '@components/SliderTemplate.vue';
 
 import banners from '@/assets/data/banners.json';
 import products from '@/assets/data/products.json';
