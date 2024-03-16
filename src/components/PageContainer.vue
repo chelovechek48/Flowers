@@ -6,8 +6,8 @@ import FirstScreen from '@components/FirstScreen.vue';
 
 <template>
   <div class="container">
-    <SearchPanel />
     <NavigationPanel class="navigation" />
+    <SearchPanel class="search-panel" />
     <FirstScreen class="main" />
   </div>
 </template>
@@ -16,20 +16,26 @@ import FirstScreen from '@components/FirstScreen.vue';
 @use '@vars/container' as container;
 
 .container {
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
   max-width: container.$width;
-  height: 100vh;
-  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   margin-inline: auto;
+  padding-block: 3.75rem;
 
   background-color: #fff;
 }
 
+.navigation,
+.search-panel {
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  width: 100%;
+}
 .navigation {
-  order: 100;
+  bottom: 0;
+}
+.search-panel {
+  top: 0;
 }
 </style>

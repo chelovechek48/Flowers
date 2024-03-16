@@ -65,9 +65,6 @@ export default {
   gap: 5px;
 
   color: inherit;
-  font-family: "Inter", sans-serif;
-  font-size: clamp(0.5rem, 3vw, 1.25rem);
-  font-weight: 500;
 
   padding: container.$padding;
   margin: (0 - container.$padding);
@@ -79,18 +76,16 @@ export default {
   }
 }
 .icon {
-  @media (min-width: calc($mobile-small + 1px)) {
-    height: 1.75rem;
-  }
-  @media (max-width: $mobile-small) {
-    height: 12vw;
-  }
+  height: 1.5rem;
 }
 .logo {
   width: 100%;
-  max-width: 18rem;
+  max-height: 2rem;
 }
 .text {
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
   @media (max-width: $mobile-small) {
     display: none;
   }

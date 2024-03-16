@@ -2,23 +2,30 @@
 import { defineProps } from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Keyboard } from 'swiper/modules';
+import 'swiper/css';
 
 import ImgTemplate from '@components/ImgTemplate.vue';
-
-const modules = [Autoplay, Keyboard];
-
-const images = import.meta.glob('@images/products/*.*');
 
 const props = defineProps({
   title: {
     type: String,
-    required: true,
+    required: false,
+    default: null,
   },
   direction: {
     type: String,
+    required: false,
+    default: 'horizontal',
+  },
+  images: {
+    type: Object,
     required: true,
   },
-  items: {
+  slideElements: {
+    type: Array,
+    required: true,
+  },
+  slideSize: {
     type: Object,
     required: true,
   },
@@ -53,83 +60,98 @@ const keyboardDisable = () => {
 </script>
 
 <template>
-  <section class="section">
-    <h2 class="section__title">
+  <Swiper
+    class="swiper"
+    tabindex="0"
+    aria-label="Для прокрутки товаров нажимайте стрелочки влево и вправо на клавиатуре"
+    slides-per-view="auto"
+    space-between="12"
+    :direction="props.direction"
+    :loop="true"
+    :lazy-preload-prev-next="5"
+
+    @swiper="initSwiper"
+    @slideChangeTransitionStart="change"
+    @focusin="keyboardEnable"
+    @focusout="keyboardDisable"
+    @mouseover="keyboardEnable"
+    @mouseout="keyboardDisable"
+
+    :modules="[ Autoplay, Keyboard ]"
+    :autoplay="{ delay: 2500 }"
+    :keyboard="{ enabled: false }"
+  >
+    <h2
+      class="swiper__title"
+      v-if="props.title"
+    >
       {{ props.title }}
     </h2>
-    <Swiper
-      class="swiper"
-      tabindex="0"
-      slides-per-view="auto"
-      space-between="12"
-      :direction="props.direction"
-      :loop="true"
-      :lazy-preload-prev-next="5"
+    <Swiper-slide
+      v-for="item in images.list"
+      :key="item.link"
 
-      @swiper="initSwiper"
-      @slideChangeTransitionStart="change"
-      @focusin="keyboardEnable"
-      @focusout="keyboardDisable"
-      @mouseover="keyboardEnable"
-      @mouseout="keyboardDisable"
-
-      :modules="modules"
-      :autoplay="{ delay: 2500 }"
-      :keyboard="{ enabled: false }"
+      class="slide"
+      tag="a"
+      :style="`
+        width: min(90%, ${props.slideSize.width});
+        aspect-ratio: min(90%, ${props.slideSize.aspectRatio});`"
+      :href="item.link"
+      :aria-label="item.description"
+      :tabindex="-1"
     >
-      <Swiper-slide
-        v-for="item in items"
-        :key="item.link"
-
-        class="card"
-        tag="a"
-        :href="item.link"
-        :tabindex="-1"
+      <ImgTemplate
+        class="image-wrapper"
+        :slide-images-path="props.images.path"
+        :slide-src="item.src"
+        :alt="item.alt"
+        v-if="props.slideElements.includes('image')"
+      />
+      <header
+        class="slide__title"
+        v-if="props.slideElements.includes('title')"
       >
-        <ImgTemplate
-          class="image-wrapper"
-          :slide-images-path="images"
-          :slide-src="item.src"
-          :alt="item.alt"
-        />
-        <header class="card__title">
-          {{ item.title }}
-        </header>
-        <div class="card__button">
-          от {{ item.price }} ₽
-        </div>
-      </Swiper-slide>
-    </Swiper>
-  </section>
+        {{ item.title }}
+      </header>
+      <div
+        class="slide__button"
+        v-if="props.slideElements.includes('price')"
+      >
+        от {{ item.price }} ₽
+      </div>
+    </Swiper-slide>
+  </Swiper>
 </template>
 
 <style lang="scss" scoped>
 @use '@vars/container';
 @use '@vars/colors';
 
-.section {
-  font-family: "Arimo", sans-serif;
-  &__title {
-    font-size: 1.6rem;
-    font-weight: 400;
-    margin-bottom: 2rem;
-  }
-}
-
 .swiper {
+  font-family: "Arimo", sans-serif;
+
   padding: container.$padding;
   margin: (0 - container.$padding);
   &:focus-within {
     background-color: rgba(blue, 0.05);
   }
+
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    order: -1;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
 }
 
-.card {
-  max-width: min(90%, 12rem);
+.slide {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border-radius: 1rem 1rem 0.5rem 0.5rem;
+  border-radius: 1rem;
 
   &:focus-visible {
     outline-offset: 0.25rem;
@@ -145,12 +167,12 @@ const keyboardDisable = () => {
     color: colors.$pink;
     padding: 0.5rem 1rem;
     box-shadow: 0 0 0 1px colors.$pink;
-    border-radius: 0.5rem;
+    border-radius: 0.5rem 1rem;
   }
 }
 .image-wrapper {
   width: 100%;
-  aspect-ratio: 1;
+  height: 100%;
   border-radius: 1rem;
   object-fit: cover;
 }

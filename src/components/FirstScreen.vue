@@ -1,8 +1,11 @@
 <script setup>
-import BannerSwiper from '@components/BannerSwiper.vue';
 import ProductsList from '@components/ProductsList.vue';
 
+import banners from '@/assets/data/banners.json';
 import products from '@/assets/data/products.json';
+
+const imagesBanners = import.meta.glob('@images/banner/*.*');
+const imagesProducts = import.meta.glob('@images/products/*.*');
 </script>
 
 <template>
@@ -10,16 +13,23 @@ import products from '@/assets/data/products.json';
     class="first-screen"
     tabindex="-1"
   >
-    <BannerSwiper />
+    <ProductsList
+      :images="{ path: imagesBanners, list: banners }"
+      :slide-elements="[ 'image' ]"
+      :slide-size="{ width: '20rem', aspectRatio: '398/225' }"
+    />
     <ProductsList
       title="Популярные товары"
-      direction="horizontal"
-      :items="products"
+      :images="{ path: imagesProducts, list: products }"
+      :slide-elements="[ 'image', 'title', 'price']"
+      :slide-size="{ width: '12rem', aspectRatio: '1' }"
     />
     <ProductsList
       title="Букеты со скидкой"
-      direction="horizontal"
       :items="products"
+      :images="{ path: imagesProducts, list: products }"
+      :slide-elements="[ 'image', 'title', 'price']"
+      :slide-size="{ width: '12rem', aspectRatio: '1' }"
     />
   </main>
 </template>
@@ -28,12 +38,10 @@ import products from '@/assets/data/products.json';
 @use '@vars/container';
 
 .first-screen {
-  flex: 1 1 0;
-  overflow-y: auto;
   padding: container.$padding;
 
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
 }
 </style>

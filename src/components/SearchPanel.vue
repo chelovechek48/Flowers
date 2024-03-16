@@ -6,7 +6,7 @@ const importPath = (id) => `${spritePath}#${id}`;
 </script>
 
 <template>
-  <nav class="search-panel">
+  <nav>
     <ul class="list">
       <li>
         <ButtonSVG
@@ -37,11 +37,8 @@ const importPath = (id) => `${spritePath}#${id}`;
 @use '@vars/colors';
 @use '@vars/breakpoints' as *;
 
-.search-panel {
-  padding: container.$padding;
-}
-
 .list {
+  padding: container.$padding;
   max-width: container.$width;
   margin-inline: auto;
 
