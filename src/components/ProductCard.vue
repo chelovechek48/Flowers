@@ -50,10 +50,8 @@ const navigationItems = [
     <div class="container">
       <div class="prev-button__wrapper">
         <ButtonSVG
-          v-for="itemm in navigationItems"
-          :key="itemm.title"
           class="prev-button"
-          :svg-path="importPath(itemm.id)"
+          :svg-path="importPath('main')"
           :aria-label="`Перейти назад`"
           :link="href"
         />
