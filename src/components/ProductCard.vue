@@ -5,7 +5,8 @@ import 'swiper/css';
 
 import ImgTemplate from '@components/ImgTemplate.vue';
 import ButtonSVG from '@components/ButtonSVG.vue';
-import spritePath from '@icons/product-card/sprite.svg';
+// import spritePath from '@icons/product-card/sprite.svg';
+import spritePath from '@icons/navigation-panel/sprite.svg';
 
 import products from '@/assets/data/products.json';
 
@@ -35,6 +36,7 @@ const imagesProducts = import.meta.glob('@images/products/*.*');
 
 const prevPath = window.history.state.back;
 const href = prevPath || '/Flowers/home';
+
 </script>
 
 <template>
@@ -43,7 +45,7 @@ const href = prevPath || '/Flowers/home';
       <div class="prev-button__wrapper">
         <ButtonSVG
           class="prev-button"
-          :svg-path="importPath('prev')"
+          :svg-path="importPath('main')"
           :aria-label="`Перейти назад`"
           :link="href"
         />
