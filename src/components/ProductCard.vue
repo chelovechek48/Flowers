@@ -5,8 +5,7 @@ import 'swiper/css';
 
 import ImgTemplate from '@components/ImgTemplate.vue';
 import ButtonSVG from '@components/ButtonSVG.vue';
-// import spritePath from '@icons/product-card/sprite.svg';
-import spritePath from '@icons/navigation-panel/sprite.svg';
+import spritePath from '@icons/product-card/sprite.svg';
 
 import products from '@/assets/data/products.json';
 
@@ -39,14 +38,8 @@ const href = prevPath || '/Flowers/home';
 
 const navigationItems = [
   {
-    id: 'main',
+    id: 'prev',
     title: 'Главная',
-    alt: 'цветочек',
-  },
-  {
-    id: 'catalog',
-    title: 'Каталог',
-    alt: 'лупа',
   },
 ];
 
