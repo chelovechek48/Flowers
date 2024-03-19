@@ -3,7 +3,7 @@ import ButtonSVG from '@components/ButtonSVG.vue';
 
 const iconsList = [
   {
-    id: 'main',
+    id: 'home',
     title: 'Главная',
     alt: 'цветочек',
   },
