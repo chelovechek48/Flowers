@@ -37,6 +37,19 @@ const imagesProducts = import.meta.glob('@images/products/*.*');
 const prevPath = window.history.state.back;
 const href = prevPath || '/Flowers/home';
 
+const navigationItems = [
+  {
+    id: 'main',
+    title: 'Главная',
+    alt: 'цветочек',
+  },
+  {
+    id: 'catalog',
+    title: 'Каталог',
+    alt: 'лупа',
+  },
+];
+
 </script>
 
 <template>
@@ -44,8 +57,10 @@ const href = prevPath || '/Flowers/home';
     <div class="container">
       <div class="prev-button__wrapper">
         <ButtonSVG
+          v-for="itemm in navigationItems"
+          :key="itemm.title"
           class="prev-button"
-          :svg-path="importPath('main')"
+          :svg-path="importPath(itemm.id)"
           :aria-label="`Перейти назад`"
           :link="href"
         />
