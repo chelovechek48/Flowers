@@ -1,7 +1,7 @@
 <script setup>
 import ButtonSVG from '@components/ButtonSVG.vue';
 
-const navigationItems = [
+const iconsList = [
   {
     id: 'main',
     title: 'Главная',
@@ -35,14 +35,14 @@ const navigationItems = [
     <nav style="width: 100%">
       <ul class="list">
         <li
-          v-for="item in navigationItems"
-          :key="item.title"
+          v-for="icon in iconsList"
+          :key="icon.title"
         >
           <ButtonSVG
-            :svg-path="item.id"
-            :button-text="item.title"
-            :aria-label="`Перейти в раздел ${item.title}`"
-            :link="item.id"
+            :svg-path="icon.id"
+            :button-text="icon.title"
+            :aria-label="`Перейти в раздел ${icon.title}`"
+            :link="icon.id"
           />
         </li>
       </ul>

@@ -1,17 +1,20 @@
 <script setup>
 import ButtonSVG from '@components/ButtonSVG.vue';
 
-const panelItems = [
+const iconsList = [
   {
     id: 'map-marker',
+    label: 'открыть карту',
   },
   {
     id: 'logo',
     class: 'logo',
     iconRatio: '170 26',
+    label: 'открыть домашнюю страницу сайта',
   },
   {
     id: 'search',
+    label: 'открыть поиск',
   },
 ];
 </script>
@@ -20,14 +23,14 @@ const panelItems = [
   <nav class="search-panel">
     <ul class="list">
       <li
-        v-for="item in panelItems"
-        :key="item.id"
+        v-for="icon in iconsList"
+        :key="icon.id"
       >
         <ButtonSVG
-          :svg-class-name="(item.class ? item.class : 'icon')"
-          :svg-path="item.id"
-          aria-label="Открыть карты"
-          :svg-ratio="item.iconRatio"
+          :svg-class-name="(icon.class ? icon.class : 'icon')"
+          :svg-path="icon.id"
+          :aria-label="icon.label"
+          :svg-ratio="icon.iconRatio"
         />
       </li>
     </ul>

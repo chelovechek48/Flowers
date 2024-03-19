@@ -42,8 +42,8 @@ const href = prevPath || '/Flowers/home';
       <div class="prev-button__wrapper">
         <ButtonSVG
           class="prev-button"
+          aria-label="Перейти назад"
           :svg-path="'prev'"
-          :aria-label="`Перейти назад`"
           :link="href"
         />
       </div>
@@ -66,6 +66,7 @@ const href = prevPath || '/Flowers/home';
           <div class="card__number-wrapper">
             <button
               class="card__number-button"
+              aria-label="вычесть 1 из количества товара"
               @click="changeCount(-1)"
               :disabled="count <= 1"
             />
@@ -78,12 +79,14 @@ const href = prevPath || '/Flowers/home';
             >
             <button
               class="card__number-button card__number-button_increment"
+              aria-label="добавить 1 к количеству товара"
               @click="changeCount(+1)"
               :disabled="count >= 99"
             />
           </div>
           <router-link
             class="card__button"
+            aria-label="добавить в корзину"
             :to="href"
           >
             В корзину за&#160;{{ item.price }}&#160;₽
