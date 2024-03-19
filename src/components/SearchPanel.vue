@@ -3,29 +3,34 @@ import spritePath from '@icons/search-panel/sprite.svg';
 import ButtonSVG from '@components/ButtonSVG.vue';
 
 const importPath = (id) => `${spritePath}#${id}`;
+
+const panelItems = [
+  {
+    id: 'map-marker',
+  },
+  {
+    id: 'logo',
+    class: 'logo',
+    iconRatio: '170 26',
+  },
+  {
+    id: 'search',
+  },
+];
 </script>
 
 <template>
-  <nav>
+  <nav class="search-panel">
     <ul class="list">
-      <li>
+      <li
+        v-for="item in panelItems"
+        :key="item.id"
+      >
         <ButtonSVG
-          :svg-path="importPath('map-marker')"
+          :svg-class-name="(item.class ? item.class : 'icon')"
+          :svg-path="importPath(item.id)"
           aria-label="Открыть карты"
-        />
-      </li>
-      <li>
-        <ButtonSVG
-          svg-class-name="logo"
-          :svg-path="importPath('logo')"
-          svg-ratio="170 26"
-          aria-label="Перейти на главную страницу"
-        />
-      </li>
-      <li>
-        <ButtonSVG
-          :svg-path="importPath('search')"
-          aria-label="Открыть поиск"
+          :svg-ratio="item.iconRatio"
         />
       </li>
     </ul>
@@ -36,6 +41,12 @@ const importPath = (id) => `${spritePath}#${id}`;
 @use '@vars/container';
 @use '@vars/colors';
 @use '@vars/breakpoints' as *;
+
+.search-panel {
+  z-index: 100;
+  position: sticky;
+  top: 0;
+}
 
 .list {
   padding: container.$padding;

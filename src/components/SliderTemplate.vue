@@ -38,14 +38,18 @@ const initSwiper = (swiper) => {
 
 const change = (swiper) => {
   const { activeIndex } = swiper;
-  const activeSlide = swiper.slides[activeIndex];
   const prevSlide = swiper.slides[activeIndex - 1];
   const nextSlide = swiper.slides[activeIndex + 1];
+
+  const prevLink = prevSlide ? prevSlide.querySelector('.slide') : null;
+  const activeLink = swiper.slides[activeIndex].querySelector('.slide');
+  const nextLink = nextSlide ? nextSlide.querySelector('.slide') : null;
+
   const swiperHasFocus = (document.activeElement === swiper.el)
-    || (document.activeElement === prevSlide)
-    || (document.activeElement === nextSlide);
+    || (document.activeElement === prevLink)
+    || (document.activeElement === nextLink);
   if (swiperHasFocus) {
-    activeSlide.focus();
+    activeLink.focus();
   }
 };
 
@@ -90,35 +94,36 @@ const keyboardDisable = () => {
     <Swiper-slide
       v-for="item in images.list"
       :key="item.link"
-
-      class="slide"
-      tag="a"
       :style="`
         width: min(90%, ${props.slideSize.width});
         aspect-ratio: ${props.slideSize.aspectRatio};`"
-      :href="item.link"
-      :aria-label="item.description"
-      :tabindex="-1"
     >
-      <ImgTemplate
-        class="image-wrapper"
-        :slide-images-path="props.images.path"
-        :slide-src="item.src"
-        :alt="item.alt"
-        v-if="props.slideElements.includes('image')"
-      />
-      <header
-        class="slide__title"
-        v-if="props.slideElements.includes('title')"
+      <router-link
+        class="slide"
+        :aria-label="item.description"
+        :tabindex="-1"
+        :to="`/Flowers/card?id=${item.id}`"
       >
-        {{ item.title }}
-      </header>
-      <div
-        class="slide__button"
-        v-if="props.slideElements.includes('price')"
-      >
-        от {{ item.price }} ₽
-      </div>
+        <ImgTemplate
+          class="image-wrapper"
+          :slide-images-path="props.images.path"
+          :slide-src="item.src"
+          :alt="item.alt"
+          v-if="props.slideElements.includes('image')"
+        />
+        <header
+          class="slide__title"
+          v-if="props.slideElements.includes('title')"
+        >
+          {{ item.title }}
+        </header>
+        <div
+          class="slide__button"
+          v-if="props.slideElements.includes('price')"
+        >
+          от {{ item.price }} ₽
+        </div>
+      </router-link>
     </Swiper-slide>
   </Swiper>
 </template>

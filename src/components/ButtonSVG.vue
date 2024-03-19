@@ -1,47 +1,43 @@
-<script>
-export default {
-  props: {
-    svgClassName: {
-      type: String,
-      required: false,
-      default: 'icon',
-    },
-    svgPath: {
-      type: String,
-      required: true,
-    },
-    svgRatio: {
-      type: String,
-      required: false,
-      default: '1 1',
-    },
-    buttonText: {
-      type: String,
-      required: false,
-      default: '',
-    },
-    ariaLabel: {
-      type: String,
-      required: true,
-    },
+<script setup>
+import { defineProps } from 'vue';
+
+const props = defineProps({
+  svgClassName: {
+    type: String,
+    required: false,
+    default: 'icon',
   },
-  computed: {
-    viewBox() {
-      return `0 0 ${this.svgRatio}`;
-    },
+  svgPath: {
+    type: String,
+    required: true,
   },
-};
+  svgRatio: {
+    type: String,
+    required: false,
+    default: '1 1',
+  },
+  buttonText: {
+    type: String,
+    required: false,
+    default: '',
+  },
+  link: {
+    type: String,
+    required: false,
+    default: '/Flowers/home',
+  },
+});
+
 </script>
 
 <template>
-  <a
+  <router-link
     class="link"
-    href=""
-    :aria-label="ariaLabel"
+    :to="link"
   >
     <svg
       :class="svgClassName"
-      :viewBox="viewBox"
+      :viewBox="`0 0 ${svgRatio}`"
     >
       <use :href="svgPath" />
     </svg>
@@ -51,7 +47,7 @@ export default {
     >
       {{ buttonText }}
     </span>
-  </a>
+  </router-link>
 </template>
 
 <style lang="scss" scoped>
@@ -69,6 +65,7 @@ export default {
   padding: container.$padding;
   margin: (0 - container.$padding);
 
+  outline-offset: -0.5rem;
   transition: 200ms ease;
   &:hover,
   &.active {

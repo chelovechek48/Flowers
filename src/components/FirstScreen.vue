@@ -38,7 +38,7 @@ const imagesProducts = import.meta.glob('@images/products/*.*');
 @use '@vars/container';
 
 .first-screen {
-  padding: container.$padding;
+  padding: 1rem container.$padding;
 
   display: flex;
   flex-direction: column;
