@@ -1,7 +1,11 @@
 <script setup>
 import { defineProps } from 'vue';
 
-const props = defineProps({
+import spritePath from '@icons/sprite.svg';
+
+const importPath = (id) => `${spritePath}#${id}`;
+
+defineProps({
   svgClassName: {
     type: String,
     required: false,
@@ -39,7 +43,7 @@ const props = defineProps({
       :class="svgClassName"
       :viewBox="`0 0 ${svgRatio}`"
     >
-      <use :href="svgPath" />
+      <use :href="importPath(svgPath)" />
     </svg>
     <span
       v-if="buttonText"

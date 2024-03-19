@@ -1,8 +1,5 @@
 <script setup>
-import spritePath from '@icons/navigation-panel/sprite.svg';
 import ButtonSVG from '@components/ButtonSVG.vue';
-
-const importPath = (id) => `${spritePath}#${id}`;
 
 const navigationItems = [
   {
@@ -42,7 +39,7 @@ const navigationItems = [
           :key="item.title"
         >
           <ButtonSVG
-            :svg-path="importPath(item.id)"
+            :svg-path="item.id"
             :button-text="item.title"
             :aria-label="`Перейти в раздел ${item.title}`"
             :link="item.id"

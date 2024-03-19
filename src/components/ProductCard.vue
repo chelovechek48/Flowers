@@ -5,13 +5,11 @@ import 'swiper/css';
 
 import ImgTemplate from '@components/ImgTemplate.vue';
 import ButtonSVG from '@components/ButtonSVG.vue';
-import spritePath from '@icons/navigation-panel/sprite.svg';
 
 import products from '@/assets/data/products.json';
 
 const route = useRoute();
 
-const importPath = (id) => `${spritePath}#${id}`;
 const item = products.find((i) => i.id === route.query.id);
 
 const count = ref(1);
@@ -44,7 +42,7 @@ const href = prevPath || '/Flowers/home';
       <div class="prev-button__wrapper">
         <ButtonSVG
           class="prev-button"
-          :svg-path="importPath('prev')"
+          :svg-path="'prev'"
           :aria-label="`Перейти назад`"
           :link="href"
         />

@@ -1,8 +1,5 @@
 <script setup>
-import spritePath from '@icons/search-panel/sprite.svg';
 import ButtonSVG from '@components/ButtonSVG.vue';
-
-const importPath = (id) => `${spritePath}#${id}`;
 
 const panelItems = [
   {
@@ -28,7 +25,7 @@ const panelItems = [
       >
         <ButtonSVG
           :svg-class-name="(item.class ? item.class : 'icon')"
-          :svg-path="importPath(item.id)"
+          :svg-path="item.id"
           aria-label="Открыть карты"
           :svg-ratio="item.iconRatio"
         />
