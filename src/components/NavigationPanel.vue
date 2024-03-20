@@ -1,6 +1,8 @@
 <script setup>
 import ButtonSVG from '@components/ButtonSVG.vue';
+import { useRoute } from 'vue-router';
 
+const route = useRoute();
 const iconsList = [
   {
     id: 'home',
@@ -39,6 +41,7 @@ const iconsList = [
           :key="icon.title"
         >
           <ButtonSVG
+            :class="route.name === icon.id ? 'active' : null"
             :svg-path="icon.id"
             :button-text="icon.title"
             :aria-label="`Перейти в раздел ${icon.title}`"

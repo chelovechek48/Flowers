@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Keyboard } from 'swiper/modules';
 import 'swiper/css';
 
-import ImgTemplate from '@components/ImgTemplate.vue';
+import ProductCard from '@components/ProductCard.vue';
 
 const props = defineProps({
   title: {
@@ -98,43 +98,20 @@ const keyboardDisable = () => {
         width: min(90%, ${props.slideSize.width});
         aspect-ratio: ${props.slideSize.aspectRatio};`"
     >
-      <router-link
-        class="slide"
-        :aria-label="item.description"
-        :tabindex="-1"
-        :to="`/Flowers/card?id=${item.id}`"
-      >
-        <ImgTemplate
-          class="image-wrapper"
-          :slide-images-path="props.images.path"
-          :slide-src="item.src"
-          :alt="item.alt"
-          v-if="props.slideElements.includes('image')"
-        />
-        <header
-          class="slide__title"
-          v-if="props.slideElements.includes('title')"
-        >
-          {{ item.title }}
-        </header>
-        <div
-          class="slide__button"
-          v-if="props.slideElements.includes('price')"
-        >
-          от {{ item.price }} ₽
-        </div>
-      </router-link>
+      <ProductCard
+        :item="item"
+        :images="images.path"
+        :slide-elements="slideElements"
+      />
     </Swiper-slide>
   </Swiper>
 </template>
 
 <style lang="scss" scoped>
 @use '@vars/container';
-@use '@vars/colors';
 
 .swiper {
   font-family: "Arimo", sans-serif;
-
   padding: container.$padding;
   margin: (0 - container.$padding);
   &:focus-within {
@@ -150,43 +127,5 @@ const keyboardDisable = () => {
     font-weight: 400;
     margin-bottom: 1rem;
   }
-}
-
-.slide {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border-radius: 1rem;
-
-  &:focus-visible {
-    outline-offset: 0.25rem;
-    outline-style: auto;
-  }
-
-  &__title {
-    font-size: 1.25rem;
-    margin-block: 0.75rem;
-  }
-
-  &__button {
-    font-size: 1.25rem;
-    color: colors.$pink;
-    padding: 0.5rem 1rem;
-    box-shadow: 0 0 0 1px colors.$pink;
-    border-radius: 0.5rem 1rem;
-    transition: 200ms ease;
-
-    &:hover {
-      color: #fff;
-      background-color: colors.$pink;
-    }
-  }
-}
-
-.image-wrapper {
-  width: 100%;
-  height: 100%;
-  border-radius: 1rem;
-  object-fit: cover;
 }
 </style>

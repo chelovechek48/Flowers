@@ -1,16 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import FirstScreen from '@components/FirstScreen.vue';
-import ProductCard from '@components/ProductCard.vue';
+import FirstScreenView from '@views/FirstScreenView.vue';
+import ProductInfoView from '@views/ProductInfoView.vue';
 
 const routes = [
   {
-    path: '/Flowers/card',
-    component: ProductCard,
+    name: 'home',
+    path: '/Flowers/home',
+    component: FirstScreenView,
   },
   {
-    path: '/Flowers/home',
-    component: FirstScreen,
+    name: 'card',
+    path: '/Flowers/card',
+    component: ProductInfoView,
   },
   {
     path: '/:pathMatch(.*)',

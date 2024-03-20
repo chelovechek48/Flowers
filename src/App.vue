@@ -5,8 +5,12 @@ import NavigationPanel from '@components/NavigationPanel.vue';
 
 <template>
   <div class="container">
-    <NavigationPanel v-if="$route.path === '/Flowers/home'" />
-    <SearchPanel v-if="$route.path === '/Flowers/home'" />
+    <NavigationPanel
+      v-if="$route.path === '/Flowers/home' || $route.path === '/Flowers/catalog'"
+    />
+    <SearchPanel
+      v-if="$route.path === '/Flowers/home' || $route.path === '/Flowers/catalog'"
+    />
     <router-view />
   </div>
 </template>
