@@ -9,10 +9,7 @@ const imagesProducts = import.meta.glob('@images/products/*.*');
 </script>
 
 <template>
-  <main
-    class="first-screen"
-    tabindex="-1"
-  >
+  <main class="first-screen">
     <SliderTemplate
       :images="{ path: imagesBanners, list: banners }"
       :slide-elements="[ 'image' ]"
