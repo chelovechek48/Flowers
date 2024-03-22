@@ -110,7 +110,7 @@ defineProps({
   }
   .card__p {
     flex: 1 1 0;
-    color: gray;
+    color: colors.$dark-gray;
     overflow: hidden;
     font-size: 1rem;
     line-height: 1.2;
