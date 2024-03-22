@@ -20,7 +20,7 @@ const props = defineProps({
   },
 });
 
-console.log(spriteNavigation, spriteCatalog);
+console.log(sprites);
 console.log(sprites[props.sprite]);
 console.log(sprites);
 
