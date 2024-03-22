@@ -2,12 +2,11 @@
 import { ref } from 'vue';
 import products from '@/assets/data/products.json';
 import ProductCard from '@components/ProductCard.vue';
-import '@icons/sprite-feed.svg';
+import spritePath from '@icons/sprite-feed.svg';
 import { useRoute, useRouter } from 'vue-router';
 
 const productsPath = import.meta.glob('@images/products/*.*');
-// const importPath = (id) => `${spritePath}#${id}`;
-const importPath = (id) => `#${id}`;
+const importPath = (id) => `${spritePath}#${id}`;
 
 const filterItems = [];
 products.forEach((prod) => {
@@ -70,7 +69,7 @@ const feed = ref(true);
             :for="it"
           >
             <svg class="choicer__icon">
-              <use :xlink:href="`/Flowers/src/assets/icons/sprite-feed.svg#${it}`" />
+              <use :href="importPath(it)" />
             </svg>
           </label>
         </div>

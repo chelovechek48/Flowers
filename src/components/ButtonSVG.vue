@@ -1,9 +1,7 @@
 <script setup>
 import { defineProps } from 'vue';
 
-import spritePath from '@icons/sprite.svg';
-
-const importPath = (id) => `${spritePath}#${id}`;
+const importPath = (id) => `#${id}`;
 
 defineProps({
   svgClassName: {
