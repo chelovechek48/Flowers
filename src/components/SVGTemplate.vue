@@ -24,7 +24,7 @@ defineProps({
 
 <template>
   <svg>
-    <use :href="`${(sprites[sprite])}#${id}`" />
+    <use :href="`${(sprites.feed)}#${id}`" />
   </svg>
 </template>
 
