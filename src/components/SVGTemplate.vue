@@ -1,12 +1,18 @@
 <script setup>
 import { defineProps } from 'vue';
 import spritePath from '@icons/sprite.svg';
+import spritePathFeed from '@icons/sprite-feed.svg';
 
-const props = defineProps({
+const sprites = {
+  main: spritePath,
+  feed: spritePathFeed,
+};
+
+defineProps({
   sprite: {
     type: String,
     required: false,
-    default: spritePath,
+    default: 'main',
   },
   id: {
     type: String,
@@ -14,12 +20,11 @@ const props = defineProps({
   },
 });
 
-console.log(`${(props.sprite)}#${props.id}`);
 </script>
 
 <template>
   <svg>
-    <use :href="`${(sprite)}#${id}`" />
+    <use :href="`${(sprites[sprite])}#${id}`" />
   </svg>
 </template>
 

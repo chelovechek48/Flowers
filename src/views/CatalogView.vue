@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 import products from '@/assets/data/products.json';
 import ProductCard from '@components/ProductCard.vue';
-import spritePath from '@icons/sprite.svg';
 import { useRoute, useRouter } from 'vue-router';
 import SVGTemplate from '@components/SVGTemplate.vue';
 
@@ -70,7 +69,7 @@ const feed = ref(true);
           >
             <SVGTemplate
               class="choicer__icon"
-              :sprite="spritePath"
+              :sprite="'feed'"
               :id="it"
             />
           </label>
