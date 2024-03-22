@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps } from 'vue';
 
-import spritePath from '@icons/sprite.svg';
+import spritePath from '@icons/sprite-feed.svg';
 
 const importPath = (id) => `${spritePath}#${id}`;
 
