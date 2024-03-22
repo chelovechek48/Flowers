@@ -69,7 +69,7 @@ const feed = ref(true);
             :for="it"
           >
             <svg class="choicer__icon">
-              <use :href="importPath(it)" />
+              <use xlink:href="@icons/sprite-feed.svg#feed" />
             </svg>
           </label>
         </div>
