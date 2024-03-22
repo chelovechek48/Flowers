@@ -1,29 +1,24 @@
 <script setup>
 import { defineProps } from 'vue';
-import spritePath from '@icons/sprite.svg';
-import spritePathFeed from '@icons/sprite-feed.svg';
+import spriteNavigation from '@icons/navigation.svg';
+import spriteCatalog from '@icons/catalog.svg';
 
 const sprites = {
-  main: spritePath,
-  feed: spritePathFeed,
+  navigation: spriteNavigation,
+  catalog: spriteCatalog,
 };
 
-const props = defineProps({
+defineProps({
   sprite: {
     type: String,
     required: false,
-    default: 'main',
+    default: 'navigation',
   },
   id: {
     type: String,
     required: true,
   },
 });
-
-console.log(spritePath, spritePathFeed);
-console.log(sprites[props.sprite]);
-console.log(sprites);
-
 </script>
 
 <template>

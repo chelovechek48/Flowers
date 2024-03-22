@@ -69,7 +69,7 @@ const feed = ref(true);
           >
             <SVGTemplate
               class="choicer__icon"
-              :sprite="'feed'"
+              :sprite="'catalog'"
               :id="it"
             />
           </label>
