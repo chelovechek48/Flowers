@@ -23,7 +23,7 @@ const routes = [
   },
   {
     name: 'card',
-    path: '/Flowers/card',
+    path: '/Flowers/product',
     component: ProductInfoView,
   },
   {

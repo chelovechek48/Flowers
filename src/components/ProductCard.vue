@@ -29,7 +29,7 @@ defineProps({
   <router-link
     :class="`card ${feed ? '_feed' : '_grid'}`"
     :aria-label="item.description"
-    :to="`/Flowers/card?id=${item.id}`"
+    :to="`/Flowers/product?id=${item.id}`"
   >
     <ImgTemplate
       v-if="slideElements.includes('image')"
