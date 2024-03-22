@@ -2,7 +2,7 @@
 import { defineProps } from 'vue';
 import spritePath from '@icons/sprite.svg';
 
-defineProps({
+const props = defineProps({
   sprite: {
     type: String,
     required: false,
@@ -13,6 +13,8 @@ defineProps({
     required: true,
   },
 });
+
+console.log(`${(props.sprite)}#${props.id}`);
 </script>
 
 <template>
