@@ -3,9 +3,12 @@ import { defineProps } from 'vue';
 
 import spritePath from '@icons/sprite.svg';
 
-const importPath = (id) => `${spritePath}#${id}`;
-
-defineProps({
+const props = defineProps({
+  sprite: {
+    type: String,
+    required: false,
+    default: null,
+  },
   svgClassName: {
     type: String,
     required: false,
@@ -31,6 +34,8 @@ defineProps({
     default: '/Flowers/home',
   },
 });
+console.log(props.sprite);
+const importPath = (id) => `${(props.sprite)}#${id}`;
 
 </script>
 

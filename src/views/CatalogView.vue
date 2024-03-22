@@ -2,8 +2,9 @@
 import { ref } from 'vue';
 import products from '@/assets/data/products.json';
 import ProductCard from '@components/ProductCard.vue';
-import spritePath from '@icons/sprite-feed.svg';
+import spritePath from '@icons/sprite.svg';
 import { useRoute, useRouter } from 'vue-router';
+import ButtonSVG from '@components/ButtonSVG.vue';
 
 const productsPath = import.meta.glob('@images/products/*.*');
 const importPath = (id) => `${spritePath}#${id}`;
@@ -68,9 +69,14 @@ const feed = ref(true);
             class="choicer__label"
             :for="it"
           >
-            <svg class="choicer__icon">
+            <ButtonSVG
+              class="choicer__icon"
+              :sprite="spritePath"
+              :svg-path="it"
+            />
+            <!-- <svg class="choicer__icon">
               <use :href="importPath(it)" />
-            </svg>
+            </svg> -->
           </label>
         </div>
       </div>
