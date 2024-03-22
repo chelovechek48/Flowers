@@ -1,9 +1,11 @@
 <script setup>
 import { ref } from 'vue';
-import products from '@/assets/data/products.json';
-import ProductCard from '@components/ProductCard.vue';
 import { useRoute, useRouter } from 'vue-router';
+
+import ProductCard from '@components/ProductCard.vue';
 import SVGTemplate from '@components/SVGTemplate.vue';
+
+import products from '@/assets/data/products.json';
 
 const productsPath = import.meta.glob('@images/products/*.*');
 
@@ -69,7 +71,6 @@ const feed = ref(true);
           >
             <SVGTemplate
               class="choicer__icon"
-              sprite="catalog"
               :id="it"
             />
           </label>

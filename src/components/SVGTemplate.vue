@@ -1,34 +1,18 @@
 <script setup>
 import { defineProps } from 'vue';
-import spriteNavigation from '@icons/navigation.svg';
-import spriteCatalog from '@icons/catalog.svg';
+import sprite from '@icons/sprite.svg';
 
-const sprites = {
-  navigation: spriteNavigation,
-  catalog: spriteCatalog,
-};
-
-const props = defineProps({
-  sprite: {
-    type: String,
-    required: false,
-    default: 'navigation',
-  },
+defineProps({
   id: {
     type: String,
     required: true,
   },
 });
-
-console.log(sprites);
-console.log(sprites[props.sprite]);
-console.log(sprites);
-
 </script>
 
 <template>
   <svg>
-    <use :href="`${(sprites[sprite])}#${id}`" />
+    <use :href="`${sprite}#${id}`" />
   </svg>
 </template>
 
