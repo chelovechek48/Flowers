@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import products from '@/assets/data/products.json';
 import ProductCard from '@components/ProductCard.vue';
-import spritePath from '@icons/catalog/sprite.svg';
+import spritePath from '@icons/sprite-feed.svg';
 import { useRoute, useRouter } from 'vue-router';
 
 const productsPath = import.meta.glob('@images/products/*.*');

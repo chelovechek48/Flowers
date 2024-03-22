@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import FirstScreenView from '@views/FirstScreenView.vue';
 import CatalogView from '@views/CatalogView.vue';
+import CartView from '@views/CartView.vue';
 import ProductInfoView from '@views/ProductInfoView.vue';
 
 const routes = [
@@ -14,6 +15,11 @@ const routes = [
     name: 'catalog',
     path: '/Flowers/catalog',
     component: CatalogView,
+  },
+  {
+    name: 'cart',
+    path: '/Flowers/cart',
+    component: CartView,
   },
   {
     name: 'card',
