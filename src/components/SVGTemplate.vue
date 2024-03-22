@@ -8,7 +8,7 @@ const sprites = {
   feed: spritePathFeed,
 };
 
-defineProps({
+const props = defineProps({
   sprite: {
     type: String,
     required: false,
@@ -20,11 +20,15 @@ defineProps({
   },
 });
 
+console.log(spritePath, spritePathFeed);
+console.log(sprites[props.sprite]);
+console.log(sprites);
+
 </script>
 
 <template>
   <svg>
-    <use :href="`${(sprites.feed)}#${id}`" />
+    <use :href="`${(sprites[sprite])}#${id}`" />
   </svg>
 </template>
 
