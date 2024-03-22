@@ -58,7 +58,7 @@ const iconsList = [
 @use '@vars/container';
 
 .list {
-  color: colors.$gray;
+  color: colors.$dark-gray;
   display: flex;
   justify-content: space-between;
   overflow: hidden;
@@ -68,7 +68,7 @@ const iconsList = [
   margin-inline: auto;
 
   background-color: colors.$white;
-  border-top: solid 1px colors.$gray;
+  border-top: solid 1px colors.$dark-gray;
 }
 
 .navigation-panel {

@@ -1,15 +1,18 @@
 <script setup>
 import SearchPanel from '@components/SearchPanel.vue';
 import NavigationPanel from '@components/NavigationPanel.vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 </script>
 
 <template>
   <div class="container">
     <NavigationPanel
-      v-if="$route.path === '/Flowers/home' || $route.path === '/Flowers/catalog'"
+      v-if="['home', 'catalog', 'cart'].includes(route.name)"
     />
     <SearchPanel
-      v-if="$route.path === '/Flowers/home' || $route.path === '/Flowers/catalog'"
+      v-if="['home', 'catalog'].includes(route.name)"
     />
     <router-view />
   </div>

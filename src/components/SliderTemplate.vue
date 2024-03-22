@@ -41,9 +41,9 @@ const change = (swiper) => {
   const prevSlide = swiper.slides[activeIndex - 1];
   const nextSlide = swiper.slides[activeIndex + 1];
 
-  const prevLink = prevSlide ? prevSlide.querySelector('.slide') : null;
-  const activeLink = swiper.slides[activeIndex].querySelector('.slide');
-  const nextLink = nextSlide ? nextSlide.querySelector('.slide') : null;
+  const prevLink = prevSlide ? prevSlide.querySelector('.card') : null;
+  const activeLink = swiper.slides[activeIndex].querySelector('.card');
+  const nextLink = nextSlide ? nextSlide.querySelector('.card') : null;
 
   const swiperHasFocus = (document.activeElement === swiper.el)
     || (document.activeElement === prevLink)
@@ -102,6 +102,7 @@ const keyboardDisable = () => {
         :item="item"
         :images="images.path"
         :slide-elements="slideElements"
+        tabindex="-1"
       />
     </Swiper-slide>
   </Swiper>
@@ -111,7 +112,6 @@ const keyboardDisable = () => {
 @use '@vars/container';
 
 .swiper {
-  font-family: "Arimo", sans-serif;
   padding: container.$padding;
   margin: (0 - container.$padding);
   &:focus-within {
@@ -123,6 +123,7 @@ const keyboardDisable = () => {
 
   &__title {
     order: -1;
+    font-family: "Arimo", sans-serif;
     font-size: 1.6rem;
     font-weight: 400;
     margin-bottom: 1rem;

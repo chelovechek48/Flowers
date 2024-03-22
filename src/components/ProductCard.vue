@@ -16,15 +16,19 @@ defineProps({
     type: Array,
     required: true,
   },
+  feed: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 </script>
 
 <template>
   <router-link
-    class="slide"
+    :class="`card ${feed ? '_feed' : '_grid'}`"
     :aria-label="item.description"
-    :tabindex="-1"
     :to="`/Flowers/card?id=${item.id}`"
   >
     <ImgTemplate
@@ -34,28 +38,37 @@ defineProps({
       :slide-src="item.src"
       :alt="item.alt"
     />
-    <header
-      v-if="slideElements.includes('title')"
-      class="slide__title"
-    >
-      {{ item.title }}
-    </header>
-    <div
-      v-if="slideElements.includes('price')"
-      class="slide__button"
-    >
-      от {{ item.price }} ₽
+    <div class="card__text">
+      <header
+        v-if="slideElements.includes('title')"
+        class="card__title"
+      >
+        {{ item.title }}
+      </header>
+      <p
+        class="card__p"
+        v-if="feed"
+      >
+        {{ item.description }}
+      </p>
+      <div
+        v-if="slideElements.includes('price')"
+        class="card__button"
+      >
+        от {{ item.price }} ₽
+      </div>
     </div>
   </router-link>
 </template>
 
 <style lang="scss" scoped>
 @use '@vars/colors';
+@use '@vars/container';
 
-.slide {
+.card {
+  font-family: "Arimo", sans-serif;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  gap: 0.75rem;
   border-radius: 1rem;
 
   &:focus-visible {
@@ -63,16 +76,23 @@ defineProps({
     outline-style: auto;
   }
 
+  &__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
   &__title {
     font-size: 1.25rem;
-    margin-block: 0.75rem;
+    line-height: 1.1;
   }
 
   &__button {
     font-size: 1.25rem;
     color: colors.$pink;
     padding: 0.5rem 1rem;
-    box-shadow: 0 0 0 1px colors.$pink;
+    box-shadow: 0 0 0 1px colors.$pink inset;
     border-radius: 0.5rem 1rem;
     transition: 200ms ease;
 
@@ -83,9 +103,33 @@ defineProps({
   }
 }
 
+._feed {
+  flex-direction: row;
+  .card__text {
+    height: 10rem;
+  }
+  .card__p {
+    flex: 1 1 0;
+    color: gray;
+    overflow: hidden;
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+  .image-wrapper {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+._grid {
+  flex-direction: column;
+  .image-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .image-wrapper {
-  width: 100%;
-  height: 100%;
   border-radius: 1rem;
   object-fit: cover;
 }
