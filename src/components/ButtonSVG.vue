@@ -1,15 +1,14 @@
 <script setup>
 import { defineProps } from 'vue';
-
-import SVGTemplate from '@components/SVGTemplate.vue';
+import SvgTemplate from '@components/SvgTemplate.vue';
 
 defineProps({
-  svgClassName: {
+  svgClass: {
     type: String,
     required: false,
     default: 'icon',
   },
-  svgPath: {
+  svgId: {
     type: String,
     required: true,
   },
@@ -19,9 +18,9 @@ defineProps({
     default: '1 1',
   },
   buttonText: {
-    type: String,
+    type: [String, null],
     required: false,
-    default: '',
+    default: null,
   },
   link: {
     type: String,
@@ -37,10 +36,10 @@ defineProps({
     class="link"
     :to="link"
   >
-    <SVGTemplate
-      :class="svgClassName"
+    <SvgTemplate
+      :class="svgClass"
       :viewBox="`0 0 ${svgRatio}`"
-      :id="svgPath"
+      :id="svgId"
     />
     <span
       v-if="buttonText"

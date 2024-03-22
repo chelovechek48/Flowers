@@ -27,8 +27,8 @@ const iconsList = [
         :key="icon.id"
       >
         <ButtonSVG
-          :svg-class-name="(icon.class ? icon.class : 'icon')"
-          :svg-path="icon.id"
+          :svg-class="(icon.class ? icon.class : 'icon')"
+          :svg-id="icon.id"
           :aria-label="icon.label"
           :svg-ratio="icon.iconRatio"
         />

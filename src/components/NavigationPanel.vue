@@ -42,7 +42,7 @@ const iconsList = [
         >
           <ButtonSVG
             :class="route.name === icon.id ? 'active' : null"
-            :svg-path="icon.id"
+            :svg-id="icon.id"
             :button-text="icon.title"
             :aria-label="`Перейти в раздел ${icon.title}`"
             :link="icon.id"

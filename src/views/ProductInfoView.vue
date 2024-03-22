@@ -43,7 +43,7 @@ const href = prevPath || '/Flowers/home';
         <ButtonSVG
           class="prev-button"
           aria-label="Перейти назад"
-          :svg-path="'prev'"
+          :svg-id="'prev'"
           :link="href"
         />
       </div>

@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import ProductCard from '@components/ProductCard.vue';
-import SVGTemplate from '@components/SVGTemplate.vue';
+import SvgTemplate from '@components/SvgTemplate.vue';
 
 import products from '@/assets/data/products.json';
 
@@ -69,7 +69,7 @@ const feed = ref(true);
             class="choicer__label"
             :for="it"
           >
-            <SVGTemplate
+            <SvgTemplate
               class="choicer__icon"
               :id="it"
             />
