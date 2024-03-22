@@ -1,14 +1,9 @@
 <script setup>
 import { defineProps } from 'vue';
 
-import spritePath from '@icons/sprite.svg';
+import SVGTemplate from '@components/SVGTemplate.vue';
 
-const props = defineProps({
-  sprite: {
-    type: String,
-    required: false,
-    default: null,
-  },
+defineProps({
   svgClassName: {
     type: String,
     required: false,
@@ -34,8 +29,6 @@ const props = defineProps({
     default: '/Flowers/home',
   },
 });
-console.log(props.sprite);
-const importPath = (id) => `${(props.sprite)}#${id}`;
 
 </script>
 
@@ -44,12 +37,11 @@ const importPath = (id) => `${(props.sprite)}#${id}`;
     class="link"
     :to="link"
   >
-    <svg
+    <SVGTemplate
       :class="svgClassName"
       :viewBox="`0 0 ${svgRatio}`"
-    >
-      <use :href="importPath(svgPath)" />
-    </svg>
+      :id="svgPath"
+    />
     <span
       v-if="buttonText"
       class="text"
