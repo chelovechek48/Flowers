@@ -28,7 +28,7 @@ const routes = [
   },
   {
     path: '/:pathMatch(.*)',
-    redirect: '/Flowers/home',
+    redirect: '/Flowers/catalog',
   },
 ];
 
