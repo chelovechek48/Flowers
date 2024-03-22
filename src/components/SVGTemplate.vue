@@ -8,7 +8,7 @@ const sprites = {
   catalog: spriteCatalog,
 };
 
-defineProps({
+const props = defineProps({
   sprite: {
     type: String,
     required: false,
@@ -19,6 +19,11 @@ defineProps({
     required: true,
   },
 });
+
+console.log(spriteNavigation, spriteCatalog);
+console.log(sprites[props.sprite]);
+console.log(sprites);
+
 </script>
 
 <template>
