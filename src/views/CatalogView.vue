@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import ProductCard from '@components/ProductCard.vue';
@@ -9,16 +9,25 @@ import products from '@/assets/data/products.json';
 
 const productsPath = import.meta.glob('@images/products/*.*');
 
-const filterItems = [];
+const filterTags = [];
 products.forEach((prod) => {
-  if (!filterItems.includes(prod.filter)) {
-    filterItems.push(prod.filter);
+  if (!filterTags.includes(prod.filter)) {
+    filterTags.push(prod.filter);
   }
 });
 
 const route = useRoute(); const router = useRouter();
-const filterTag = ref(route.query.filter || filterItems[0]);
-const feed = ref(true);
+const filterTag = ref(route.query.filter || filterTags[0]);
+const catalogLayoutIsGrid = ref(
+  Boolean(
+    JSON.parse(localStorage.getItem('catalogLayoutIsGrid')),
+  ),
+);
+
+watch(catalogLayoutIsGrid, (newValue) => {
+  localStorage.setItem('catalogLayoutIsGrid', newValue);
+});
+
 </script>
 
 <template>
@@ -32,61 +41,60 @@ const feed = ref(true);
         tabindex="-1"
       >
         <div
-          v-for="(item, index) in filterItems"
-          :key="item"
+          v-for="(tagName, index) in filterTags"
+          :key="tagName"
         >
           <input
             class="filter__input"
             type="radio"
-            :id="item"
             name="catalog-filter"
-            :value="item"
-            :checked="route.query.filter ? (route.query.filter === item) : (index === 0)"
+            :id="tagName"
+            :checked="route.query.filter ? (route.query.filter === tagName) : (index === 0)"
+            :value="tagName"
             v-model="filterTag"
-            @change="router.push({ query: { filter: item } })"
+            @change="router.push({ query: { filter: tagName } })"
           >
           <label
             class="filter__label"
-            :for="item"
-          >{{ item }}</label>
+            :for="tagName"
+          >{{ tagName }}</label>
         </div>
       </div>
       <div class="choicer">
         <div
-          v-for="it in ['grid', 'feed']"
-          :key="it"
+          v-for="direction in ['grid', 'feed']"
+          :key="direction"
         >
           <input
             class="choicer__input"
             type="radio"
-            name="feed"
-            :id="it"
-            v-model="feed"
-            :value="it === 'feed'"
-            :checked="it === 'feed'"
+            name="layout-direction"
+            :id="direction"
+            :value="direction === 'grid'"
+            v-model="catalogLayoutIsGrid"
           >
           <label
             class="choicer__label"
-            :for="it"
+            :for="direction"
           >
             <SvgTemplate
               class="choicer__icon"
-              :id="it"
+              :id="direction"
             />
           </label>
         </div>
       </div>
     </aside>
-    <ul :class="`list ${feed ? '_feed' : '_grid'}`">
+    <ul :class="`list ${catalogLayoutIsGrid ? '_grid' : '_feed'}`">
       <li
-        v-for="item in products.filter((prod) => prod.filter === filterTag)"
-        :key="item.link"
+        v-for="product in products.filter((product) => product.filter === filterTag)"
+        :key="product.id"
       >
         <ProductCard
-          :item="item"
+          :item="product"
           :images="productsPath"
-          :slide-elements="[ 'image', 'title', 'price']"
-          :feed="feed"
+          :slide-elements="['image', 'title', 'price']"
+          :layout-is-grid="catalogLayoutIsGrid"
         />
       </li>
     </ul>

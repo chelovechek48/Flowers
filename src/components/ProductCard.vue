@@ -16,10 +16,10 @@ defineProps({
     type: Array,
     required: true,
   },
-  feed: {
+  layoutIsGrid: {
     type: Boolean,
     required: false,
-    default: false,
+    default: true,
   },
 });
 
@@ -27,7 +27,7 @@ defineProps({
 
 <template>
   <router-link
-    :class="`card ${feed ? '_feed' : '_grid'}`"
+    :class="`card ${layoutIsGrid ? '_grid' : '_feed'}`"
     :aria-label="item.description"
     :to="`/Flowers/product?id=${item.id}`"
   >
@@ -47,7 +47,7 @@ defineProps({
       </header>
       <p
         class="card__p"
-        v-if="feed"
+        v-if="!layoutIsGrid"
       >
         {{ item.description }}
       </p>
@@ -63,7 +63,6 @@ defineProps({
 
 <style lang="scss" scoped>
 @use '@vars/colors';
-@use '@vars/container';
 
 .card {
   font-family: "Arimo", sans-serif;
