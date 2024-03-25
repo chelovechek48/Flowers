@@ -46,7 +46,7 @@ defineProps({
         {{ item.title }}
       </header>
       <p
-        class="card__p"
+        class="card__paragraph"
         v-if="!layoutIsGrid"
       >
         {{ item.description }}
@@ -107,7 +107,7 @@ defineProps({
   .card__text {
     height: 10rem;
   }
-  .card__p {
+  .card__paragraph {
     flex: 1 1 0;
     color: colors.$dark-gray;
     overflow: hidden;
