@@ -23,7 +23,6 @@ const imagesProducts = import.meta.glob('@images/products/*.*');
     />
     <SliderTemplate
       title="Букеты со скидкой"
-      :items="products"
       :images="{ path: imagesProducts, list: products }"
       :slide-elements="[ 'image', 'title', 'price']"
       :slide-size="{ width: '12rem', aspectRatio: '1' }"
