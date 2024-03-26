@@ -41,9 +41,9 @@ const change = (swiper) => {
   const prevSlide = swiper.slides[activeIndex - 1];
   const nextSlide = swiper.slides[activeIndex + 1];
 
-  const prevLink = prevSlide ? prevSlide.querySelector('.card') : null;
-  const activeLink = swiper.slides[activeIndex].querySelector('.card');
-  const nextLink = nextSlide ? nextSlide.querySelector('.card') : null;
+  const prevLink = prevSlide ? prevSlide.querySelector('.card__link') : null;
+  const activeLink = swiper.slides[activeIndex].querySelector('.card__link');
+  const nextLink = nextSlide ? nextSlide.querySelector('.card__link') : null;
 
   const swiperHasFocus = (document.activeElement === swiper.el)
     || (document.activeElement === prevLink)
@@ -102,7 +102,7 @@ const keyboardDisable = () => {
         :item="item"
         :images="images.path"
         :slide-elements="slideElements"
-        tabindex="-1"
+        :is-slide="true"
       />
     </Swiper-slide>
   </Swiper>

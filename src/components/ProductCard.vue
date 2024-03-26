@@ -1,7 +1,8 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
 
 import ImgTemplate from '@components/ImgTemplate.vue';
+import ProductCounter from '@components/ProductCounter.vue';
 
 defineProps({
   item: {
@@ -21,24 +22,40 @@ defineProps({
     required: false,
     default: true,
   },
+  isSlide: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
+const count = ref(1);
+const updateCount = (value) => {
+  count.value = value;
+};
 </script>
 
 <template>
-  <router-link
+  <div
     :class="`card ${layoutIsGrid ? '_grid' : '_feed'}`"
-    :aria-label="item.description"
-    :to="`/Flowers/product?id=${item.id}`"
   >
+    <router-link
+      class="card__link"
+      :aria-label="item.description"
+      :to="`/Flowers/product?id=${item.id}`"
+      :tabindex="isSlide ? '-1' : ''"
+    />
     <ImgTemplate
       v-if="slideElements.includes('image')"
-      class="image-wrapper"
+      class="card__image"
       :slide-images-path="images"
       :slide-src="item.src"
       :alt="item.alt"
     />
-    <div class="card__text">
+    <div
+      class="card__text"
+      v-if="slideElements.length !== 1"
+    >
       <header
         v-if="slideElements.includes('title')"
         class="card__title"
@@ -53,12 +70,20 @@ defineProps({
       </p>
       <div
         v-if="slideElements.includes('price')"
-        class="card__button"
+        :class="`card__button ${slideElements.includes('counter') ? 'card__button_absolute' : ''}`"
+        :aria-label="item.description"
       >
-        от {{ item.price }} ₽
+        {{ `
+          ${slideElements.includes('counter') ? '' : 'от '}
+          ${item.price * count} ₽`
+        }}
       </div>
+      <ProductCounter
+        v-if="slideElements.includes('counter')"
+        @countChanged="updateCount($event)"
+      />
     </div>
-  </router-link>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -68,11 +93,19 @@ defineProps({
   font-family: "Arimo", sans-serif;
   display: flex;
   gap: 0.75rem;
-  border-radius: 1rem;
+  position: relative;
 
-  &:focus-visible {
-    outline-offset: 0.25rem;
-    outline-style: auto;
+  &__link {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 1rem;
+    &:focus-visible {
+      outline-offset: 0.25rem;
+      outline-style: auto;
+    }
   }
 
   &__text {
@@ -86,7 +119,6 @@ defineProps({
     font-size: 1.25rem;
     line-height: 1.1;
   }
-
   &__button {
     font-size: 1.25rem;
     color: colors.$pink;
@@ -95,10 +127,19 @@ defineProps({
     border-radius: 0.5rem 1rem;
     transition: 200ms ease;
 
-    &:hover {
+    &_absolute {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 0.5rem;
+      pointer-events: none;
       color: #fff;
       background-color: colors.$pink;
     }
+  }
+  &:hover &__button,
+  &:focus-within &__button {
+    color: #fff;
+    background-color: colors.$pink;
   }
 }
 
@@ -114,7 +155,7 @@ defineProps({
     font-size: 1rem;
     line-height: 1.2;
   }
-  .image-wrapper {
+  .card__image {
     width: 10rem;
     height: 10rem;
   }
@@ -122,13 +163,13 @@ defineProps({
 
 ._grid {
   flex-direction: column;
-  .image-wrapper {
+  .card__image {
     width: 100%;
     height: 100%;
   }
 }
 
-.image-wrapper {
+.card__image {
   border-radius: 1rem;
   object-fit: cover;
 }
