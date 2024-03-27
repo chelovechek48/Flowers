@@ -4,7 +4,7 @@ import { defineProps, ref } from 'vue';
 import ImgTemplate from '@components/ImgTemplate.vue';
 import ProductCounter from '@components/ProductCounter.vue';
 
-defineProps({
+const props = defineProps({
   item: {
     type: Object,
     required: true,
@@ -27,18 +27,32 @@ defineProps({
     required: false,
     default: false,
   },
+  isCart: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
-const count = ref(1);
-const updateCount = (value) => {
-  count.value = value;
+const cartStorage = JSON.parse(localStorage.getItem('cart-storage')) || {};
+const count = ref(
+  cartStorage[props.item.id] || 1,
+);
+
+const addToCart = (newCount) => {
+  count.value = newCount;
+  const currentCartStorage = JSON.parse(localStorage.getItem('cart-storage')) || {};
+  if (newCount > 0) {
+    currentCartStorage[props.item.id] = newCount;
+  } else {
+    delete currentCartStorage[props.item.id];
+  }
+  localStorage.setItem('cart-storage', JSON.stringify(currentCartStorage));
 };
 </script>
 
 <template>
-  <div
-    :class="`card ${layoutIsGrid ? '_grid' : '_feed'}`"
-  >
+  <div :class="`card ${layoutIsGrid ? '_grid' : '_feed'}`">
     <router-link
       class="card__link"
       :aria-label="item.description"
@@ -73,14 +87,17 @@ const updateCount = (value) => {
         :class="`card__button ${slideElements.includes('counter') ? 'card__button_absolute' : ''}`"
         :aria-label="item.description"
       >
-        {{ `
-          ${slideElements.includes('counter') ? '' : 'от '}
-          ${item.price * count} ₽`
+        {{
+          slideElements.includes('counter')
+            ?`${item.price * count} ₽`
+            : `от ${item.price} ₽`
         }}
       </div>
       <ProductCounter
         v-if="slideElements.includes('counter')"
-        @countChanged="updateCount($event)"
+        @countChanged="addToCart($event)"
+        :product-count="count"
+        :min-count="0"
       />
     </div>
   </div>

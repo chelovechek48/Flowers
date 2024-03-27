@@ -1,19 +1,29 @@
 <script setup>
-import { defineEmits, ref } from 'vue';
+import { defineEmits, defineProps, ref } from 'vue';
 
 const emit = defineEmits(['countChanged']);
-
-const count = ref(1);
+const props = defineProps({
+  productCount: {
+    type: Number,
+    required: true,
+  },
+  minCount: {
+    type: Number,
+    required: false,
+    default: 1,
+  },
+});
+const count = ref(props.productCount);
 
 const changeCount = (increment) => {
-  count.value = Math.max(Number(count.value) + increment, 1);
+  count.value = Math.max(Number(count.value) + increment, props.minCount);
   emit('countChanged', count.value);
 };
 const formattingCount = () => {
   const formattingValue = Number(count.value.replace(/\D/g, ''));
   let validValue;
-  if (formattingValue < 1) {
-    validValue = 1;
+  if (formattingValue <= props.minCount) {
+    validValue = props.minCount;
   } else if (formattingValue > 99) {
     validValue = 99;
   } else {
@@ -31,7 +41,7 @@ const formattingCount = () => {
       class="counter-button"
       aria-label="вычесть 1 из количества товара"
       @click.native.stop="changeCount(-1)"
-      :disabled="count <= 1"
+      :disabled="count <= minCount"
     />
     <input
       class="counter"

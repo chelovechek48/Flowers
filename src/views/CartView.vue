@@ -4,13 +4,33 @@ import products from '@/assets/data/products.json';
 import ProductCard from '@components/ProductCard.vue';
 
 const imagesProducts = import.meta.glob('@images/products/*.*');
+
+const cartStorage = JSON.parse(localStorage.getItem('cart-storage')) || {};
+const productFilter = products.filter((prod) => cartStorage[prod.id]);
 </script>
 
 <template>
   <section class="cart">
+    <div v-if="productFilter.length">
+      <ul class="list">
+        <li
+          class="item"
+          v-for="product in productFilter"
+          :key="product.id"
+        >
+          <ProductCard
+            :item="product"
+            :images="imagesProducts"
+            :slide-elements="['image', 'title', 'counter', 'price']"
+            :layout-is-grid="false"
+            :is-cart="true"
+          />
+        </li>
+      </ul>
+    </div>
     <div
       class="cart__empty"
-      v-if="0"
+      v-else
     >
       <img
         class="cart__image"
@@ -23,22 +43,6 @@ const imagesProducts = import.meta.glob('@images/products/*.*');
       <p class="cart__paragraph">
         Ваша корзина пуста, откройте «Каталог» и выберите понравившийся товар
       </p>
-    </div>
-    <div v-else>
-      <ul class="list">
-        <li
-          class="item"
-          v-for="product in products"
-          :key="product.id"
-        >
-          <ProductCard
-            :item="product"
-            :images="imagesProducts"
-            :slide-elements="['image', 'title', 'counter', 'price']"
-            :layout-is-grid="false"
-          />
-        </li>
-      </ul>
     </div>
   </section>
 </template>

@@ -17,9 +17,14 @@ const imagesProducts = import.meta.glob('@images/products/*.*');
 const prevPath = window.history.state.back;
 const href = prevPath || '/Flowers/home';
 
-const count = ref(1);
-const updateCount = (value) => {
-  count.value = value;
+const cartStorage = JSON.parse(localStorage.getItem('cart-storage')) || {};
+const count = ref(
+  cartStorage[item.id] || 1,
+);
+
+const addToCart = (productId, productCount) => {
+  cartStorage[productId] = productCount;
+  localStorage.setItem('cart-storage', JSON.stringify(cartStorage));
 };
 
 </script>
@@ -51,11 +56,15 @@ const updateCount = (value) => {
       </div>
       <div class="card__to-cart-wrapper">
         <div class="card__to-cart">
-          <ProductCounter @countChanged="updateCount($event)" />
+          <ProductCounter
+            @countChanged="count = $event"
+            :product-count="count"
+          />
           <router-link
             class="card__button"
             aria-label="добавить в корзину"
             :to="href"
+            @click="addToCart(item.id, count)"
           >
             В корзину за&#160;{{ item.price * count }}&#160;₽
           </router-link>
