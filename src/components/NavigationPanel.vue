@@ -68,7 +68,7 @@ const iconsList = [
   margin-inline: auto;
 
   background-color: colors.$white;
-  border-top: solid 1px colors.$dark-gray;
+  box-shadow: 0 -1px 0 0 colors.$medium-gray;
 }
 
 .navigation-panel {
