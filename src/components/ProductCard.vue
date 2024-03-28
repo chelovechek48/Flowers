@@ -1,9 +1,10 @@
 <script setup>
-import { defineProps, ref } from 'vue';
+import { defineEmits, defineProps, ref } from 'vue';
 
 import ImgTemplate from '@components/ImgTemplate.vue';
 import ProductCounter from '@components/ProductCounter.vue';
 
+const emit = defineEmits(['countChanged']);
 const props = defineProps({
   item: {
     type: Object,
@@ -48,6 +49,8 @@ const addToCart = (newCount) => {
     delete currentCartStorage[props.item.id];
   }
   localStorage.setItem('cart-storage', JSON.stringify(currentCartStorage));
+
+  emit('countChanged', { id: props.item.id, count: newCount });
 };
 </script>
 
@@ -84,7 +87,9 @@ const addToCart = (newCount) => {
       </p>
       <div
         v-if="slideElements.includes('price')"
-        :class="`card__button ${slideElements.includes('counter') ? 'card__button_absolute' : ''}`"
+        :class="`card__button ${slideElements.includes('counter')
+          ? 'card__button_absolute'
+          : 'card__button_default'}`"
         :aria-label="item.description"
       >
         {{
@@ -138,24 +143,27 @@ const addToCart = (newCount) => {
   }
   &__button {
     font-size: 1.25rem;
-    color: colors.$pink;
     padding: 0.5rem 1rem;
-    box-shadow: 0 0 0 1px colors.$pink inset;
     border-radius: 0.5rem 1rem;
     transition: 200ms ease;
+      color: colors.$pink;
 
+    &_default {
+      background-color: colors.$white;
+      box-shadow: 0 0 0 1px colors.$pink inset;
+    }
     &_absolute {
+      background-color: colors.$white;
+      pointer-events: none;
+
       position: absolute;
       bottom: 0.5rem;
       left: 0.5rem;
-      pointer-events: none;
-      color: #fff;
-      background-color: colors.$pink;
     }
   }
-  &:hover &__button,
-  &:focus-within &__button {
-    color: #fff;
+  &:hover &__button_default,
+  &:focus-within &__button_default {
+    color: colors.$white;
     background-color: colors.$pink;
   }
 }
