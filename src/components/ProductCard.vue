@@ -171,7 +171,7 @@ const addToCart = (newCount) => {
 ._feed {
   flex-direction: row;
   .card__text {
-    height: 10rem;
+    height: min(40vw, 10rem);
   }
   .card__paragraph {
     flex: 1 1 0;
@@ -181,8 +181,8 @@ const addToCart = (newCount) => {
     line-height: 1.2;
   }
   .card__image {
-    width: 10rem;
-    height: 10rem;
+    width: min(40vw, 10rem);
+    height: min(40vw, 10rem);
   }
 }
 

@@ -25,7 +25,7 @@ defineProps({
   link: {
     type: String,
     required: false,
-    default: '/Flowers/home',
+    default: 'home',
   },
 });
 

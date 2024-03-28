@@ -42,7 +42,10 @@ const getPrice = (vars) => {
         />
       </li>
     </ul>
-    <button class="button">
+    <button
+      class="button"
+      aria-label="Оформить заказ"
+    >
       Заказать за {{
         productFilter.map((prod) => {
           return prod.price * prod.count
@@ -65,18 +68,32 @@ const getPrice = (vars) => {
     <p class="cart__paragraph">
       Ваша корзина пуста, откройте «Каталог» и выберите понравившийся товар
     </p>
+    <router-link
+      class="link"
+      to="catalog"
+      aria-label="Перейти в каталог"
+    >
+      Перейти в Каталог
+    </router-link>
   </section>
 </template>
 
 <style lang="scss" scoped>
+@use '@vars/breakpoints';
 @use '@vars/container';
 @use '@vars/colors';
 
 .cart {
   font-family: "Arimo", sans-serif;
   padding: 1rem container.$padding 0 container.$padding;
-  min-height: calc(100vh - 3.75rem);
-  min-height: calc(100dvh - 3.75rem);
+  @media (min-width: calc(breakpoints.$mobile-small + 1px)) {
+    min-height: calc(100vh - 3.75rem);
+    min-height: calc(100dvh - 3.75rem);
+  }
+  @media (max-width: breakpoints.$mobile-small) {
+    min-height: calc(100vh - 2.5rem);
+    min-height: calc(100dvh - 2.5rem);
+  }
 
   display: flex;
   flex-direction: column;
@@ -112,13 +129,27 @@ const getPrice = (vars) => {
   gap: (container.$padding * 1.5) container.$padding;
 }
 
+.link {
+  font-size: 1.25rem;
+  text-align: center;
+  color: #fff;
+  background-color: colors.$pink;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+}
+
 .button {
   z-index: 20;
   position: sticky;
-  bottom: 3.75rem;
   margin-inline: -0.75rem;
+  @media (min-width: calc(breakpoints.$mobile-small + 1px)) {
+    bottom: 3.75rem;
+  }
+  @media (max-width: breakpoints.$mobile-small) {
+    bottom: 2.5rem;
+  }
 
-  font-family: "Arimo", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 1.5rem;
   text-align: center;
   color: #fff;
