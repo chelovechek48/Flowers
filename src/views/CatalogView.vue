@@ -101,7 +101,7 @@ watch(catalogLayoutIsGrid, (newValue) => {
         <ProductCard
           :item="product"
           :images="productsPath"
-          :slide-elements="['image', 'title', 'price']"
+          :slide-elements="['image', 'title', 'price', 'favorites']"
           :layout-is-grid="catalogLayoutIsGrid"
         />
       </li>

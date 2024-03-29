@@ -63,7 +63,6 @@ const formattingCount = () => {
 @use '@vars/colors';
 
 .counter {
-
   width: 2.5rem;
   height: 2.5rem;
   font-family: "Arimo", sans-serif;

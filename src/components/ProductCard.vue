@@ -79,7 +79,10 @@ const addToFavorites = (id) => {
       :to="`/Flowers/product?id=${item.id}`"
       :tabindex="isSlide ? '-1' : ''"
     />
-    <div class="favorites">
+    <div
+      class="favorites"
+      v-if="slideElements.includes('favorites')"
+    >
       <input
         class="favorites__input visually-hidden"
         type="checkbox"
@@ -88,6 +91,7 @@ const addToFavorites = (id) => {
         :data-id="item.id"
         @click="addToFavorites(item.id)"
         :checked="favorites.indexOf(item.id) + 1"
+        :tabindex="isSlide ? '-1' : ''"
       >
       <label
         class="favorites__label"
@@ -146,6 +150,7 @@ const addToFavorites = (id) => {
 </template>
 
 <style lang="scss" scoped>
+@use '@vars/container';
 @use '@vars/colors';
 
 .favorites {
@@ -162,9 +167,15 @@ const addToFavorites = (id) => {
 
   &__label {
     color: rgba(colors.$white, 0.9);
+    display: flex;
+    padding: container.$padding;
+    margin: 0 - container.$padding;
   }
   &__input:checked + &__label {
     color: rgba(colors.$pink, 0.9);
+  }
+  &__input:focus-visible + &__label {
+    outline: auto;
   }
 }
 

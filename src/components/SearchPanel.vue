@@ -3,10 +3,6 @@ import ButtonSVG from '@components/ButtonSVG.vue';
 
 const iconsList = [
   {
-    id: 'map-marker',
-    label: 'открыть карту',
-  },
-  {
     id: 'logo',
     class: 'logo',
     iconRatio: '170 26',

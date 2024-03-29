@@ -13,15 +13,12 @@ const productFilter = products
 
 const addToCart = () => {
   const cartStorage = JSON.parse(localStorage.getItem('cart-storage')) || [];
-  const newCartStorage = cartStorage;
   for (let i = 0; i < productFilter.length; i += 1) {
-    if (!newCartStorage[productFilter[i].id]) {
-      newCartStorage[productFilter[i].id] = 1;
+    if (!cartStorage[productFilter[i].id]) {
+      cartStorage[productFilter[i].id] = 1;
     }
   }
-  if (cartStorage !== newCartStorage) {
-    localStorage.setItem('cart-storage', JSON.stringify(cartStorage));
-  }
+  localStorage.setItem('cart-storage', JSON.stringify(cartStorage));
 };
 
 </script>

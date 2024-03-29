@@ -141,7 +141,7 @@ const addToCart = (productId, productCount) => {
 
   &__button {
     width: 100%;
-    font-family: "Arimo", sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 1.25rem;
     text-align: center;
     color: #fff;

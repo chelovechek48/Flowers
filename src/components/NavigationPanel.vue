@@ -25,9 +25,9 @@ const iconsList = [
     alt: 'сердечко',
   },
   {
-    id: 'profile',
-    title: 'Профиль',
-    alt: 'пользователь',
+    id: 'map-marker',
+    title: 'На карте',
+    alt: 'метка на карте',
   },
 ];
 </script>
