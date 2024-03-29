@@ -9,10 +9,10 @@ const route = useRoute();
 <template>
   <div class="container">
     <NavigationPanel
-      v-if="['home', 'catalog', 'cart'].includes(route.name)"
+      v-if="!['card'].includes(route.name)"
     />
     <SearchPanel
-      v-if="['home', 'catalog'].includes(route.name)"
+      v-if="!['card'].includes(route.name)"
     />
     <router-view />
   </div>

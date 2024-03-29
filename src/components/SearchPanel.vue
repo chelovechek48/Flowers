@@ -46,11 +46,15 @@ const iconsList = [
   z-index: 100;
   position: sticky;
   top: 0;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .list {
   padding: container.$padding;
   max-width: container.$width;
+  width: 100%;
   margin-inline: auto;
 
   color: colors.$plum;

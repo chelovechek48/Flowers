@@ -5,12 +5,20 @@ import { useRoute, useRouter } from 'vue-router';
 import ProductCard from '@components/ProductCard.vue';
 import SvgTemplate from '@components/SvgTemplate.vue';
 
-import products from '@/assets/data/products.json';
+import productsList from '@/assets/data/products.json';
 
 const productsPath = import.meta.glob('@images/products/*.*');
 
+const props = defineProps({
+  products: {
+    type: Array,
+    required: false,
+    default: productsList,
+  },
+});
+
 const filterTags = [];
-products.forEach((prod) => {
+props.products.forEach((prod) => {
   if (!filterTags.includes(prod.filter)) {
     filterTags.push(prod.filter);
   }
@@ -45,7 +53,7 @@ watch(catalogLayoutIsGrid, (newValue) => {
           :key="tagName"
         >
           <input
-            class="filter__input"
+            class="filter__input visually-hidden"
             type="radio"
             name="catalog-filter"
             :id="tagName"
@@ -66,7 +74,7 @@ watch(catalogLayoutIsGrid, (newValue) => {
           :key="direction"
         >
           <input
-            class="choicer__input"
+            class="choicer__input visually-hidden"
             type="radio"
             name="layout-direction"
             :id="direction"
@@ -108,7 +116,7 @@ watch(catalogLayoutIsGrid, (newValue) => {
 .catalog {
   display: flex; flex-direction: column;
   gap:  (container.$padding * 1.5);
-  padding: 0rem container.$padding container.$padding;
+  padding: 0rem container.$padding 1rem container.$padding;
 }
 
 .aside {
@@ -119,7 +127,7 @@ watch(catalogLayoutIsGrid, (newValue) => {
 
   display: flex; align-items: center; justify-content: space-between;
   gap: container.$padding;
-  padding-inline: container.$padding;
+  padding: 0.5rem container.$padding;
   margin-inline: (0 - container.$padding);
 }
 
@@ -128,15 +136,11 @@ watch(catalogLayoutIsGrid, (newValue) => {
   display: flex;
   overflow-x: auto;
 
-  padding-block: container.$padding;
   padding-left: container.$padding;
   margin-left: (0 - container.$padding);
+  padding-block: container.$padding;
+  margin-block: 0 - container.$padding;
 
-  &__input {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-  }
   &__input:checked + &__label {
     background-color: colors.$medium-gray;
   }
@@ -158,11 +162,6 @@ watch(catalogLayoutIsGrid, (newValue) => {
   display: flex;
   gap: container.$padding;
 
-  &__input {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-  }
   &__label {
     display: block;
     padding: 0.5rem;

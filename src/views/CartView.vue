@@ -59,7 +59,7 @@ const getPrice = (vars) => {
   >
     <img
       class="cart__image"
-      src="@icons/cart/cart-is-empty.svg"
+      src="@icons/empty/cart-is-empty.svg"
       alt="грустный пакетик"
     >
     <h2 class="cart__title">
@@ -87,12 +87,12 @@ const getPrice = (vars) => {
   font-family: "Arimo", sans-serif;
   padding: 1rem container.$padding 0 container.$padding;
   @media (min-width: calc(breakpoints.$mobile-small + 1px)) {
-    min-height: calc(100vh - 3.75rem);
-    min-height: calc(100dvh - 3.75rem);
+    min-height: calc(100vh - 3.5rem - 3.75rem);
+    min-height: calc(100dvh - 3.5rem - 3.75rem);
   }
   @media (max-width: breakpoints.$mobile-small) {
-    min-height: calc(100vh - 2.5rem);
-    min-height: calc(100dvh - 2.5rem);
+    min-height: calc(100vh - 3.5rem - 2.5rem);
+    min-height: calc(100dvh - 3.5rem - 2.5rem);
   }
 
   display: flex;
@@ -109,7 +109,7 @@ const getPrice = (vars) => {
 
   }
   &__image {
-    width: 5rem;
+    height: 5rem;
   }
   &__title {
     font-size: 1.6rem;

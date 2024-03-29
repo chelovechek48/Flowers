@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import FirstScreenView from '@views/FirstScreenView.vue';
 import CatalogView from '@views/CatalogView.vue';
 import CartView from '@views/CartView.vue';
+import FavoritesView from '@views/FavoritesView.vue';
 import ProductInfoView from '@views/ProductInfoView.vue';
 
 const routes = [
@@ -20,6 +21,11 @@ const routes = [
     name: 'cart',
     path: '/Flowers/cart',
     component: CartView,
+  },
+  {
+    name: 'favorites',
+    path: '/Flowers/favorites',
+    component: FavoritesView,
   },
   {
     name: 'card',

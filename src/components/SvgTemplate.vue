@@ -7,11 +7,16 @@ defineProps({
     type: String,
     required: true,
   },
+  viewBox: {
+    type: String,
+    required: false,
+    default: '0 0 1 1',
+  },
 });
 </script>
 
 <template>
-  <svg>
+  <svg :viewBox="viewBox">
     <use :href="`${sprite}#${id}`" />
   </svg>
 </template>

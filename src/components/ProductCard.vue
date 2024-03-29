@@ -2,6 +2,7 @@
 import { defineEmits, defineProps, ref } from 'vue';
 
 import ImgTemplate from '@components/ImgTemplate.vue';
+import SvgTemplate from '@components/SvgTemplate.vue';
 import ProductCounter from '@components/ProductCounter.vue';
 
 const emit = defineEmits(['countChanged']);
@@ -52,6 +53,22 @@ const addToCart = (newCount) => {
 
   emit('countChanged', { id: props.item.id, count: newCount });
 };
+
+const favorites = JSON.parse(localStorage.getItem('favorites-storage')) || [];
+const addToFavorites = (id) => {
+  const currentFavoritesStorage = JSON.parse(localStorage.getItem('favorites-storage')) || [];
+  const index = currentFavoritesStorage.indexOf(id);
+  const checkboxList = document.querySelectorAll(`[data-id="${id}"]`);
+  if (index + 1) {
+    currentFavoritesStorage.splice(index, 1);
+  } else {
+    currentFavoritesStorage.push(id);
+  }
+  for (let i = 0; i < checkboxList.length; i += 1) {
+    checkboxList[i].checked = !(index + 1);
+  }
+  localStorage.setItem('favorites-storage', JSON.stringify(currentFavoritesStorage));
+};
 </script>
 
 <template>
@@ -62,6 +79,26 @@ const addToCart = (newCount) => {
       :to="`/Flowers/product?id=${item.id}`"
       :tabindex="isSlide ? '-1' : ''"
     />
+    <div class="favorites">
+      <input
+        class="favorites__input visually-hidden"
+        type="checkbox"
+        name="liked"
+        :id="`liked-${item.id}`"
+        :data-id="item.id"
+        @click="addToFavorites(item.id)"
+        :checked="favorites.indexOf(item.id) + 1"
+      >
+      <label
+        class="favorites__label"
+        :for="`liked-${item.id}`"
+      >
+        <SvgTemplate
+          class="favorites__icon"
+          id="favorites-fill"
+        />
+      </label>
+    </div>
     <ImgTemplate
       v-if="slideElements.includes('image')"
       class="card__image"
@@ -110,6 +147,26 @@ const addToCart = (newCount) => {
 
 <style lang="scss" scoped>
 @use '@vars/colors';
+
+.favorites {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+
+  &__icon {
+    color: inherit;
+    cursor: pointer;
+    height: 2.5rem;
+    transition: 200ms;
+  }
+
+  &__label {
+    color: rgba(colors.$white, 0.9);
+  }
+  &__input:checked + &__label {
+    color: rgba(colors.$pink, 0.9);
+  }
+}
 
 .card {
   font-family: "Arimo", sans-serif;
@@ -171,7 +228,7 @@ const addToCart = (newCount) => {
 ._feed {
   flex-direction: row;
   .card__text {
-    height: min(40vw, 10rem);
+    height: min(45vw, 10rem);
   }
   .card__paragraph {
     flex: 1 1 0;
@@ -181,8 +238,8 @@ const addToCart = (newCount) => {
     line-height: 1.2;
   }
   .card__image {
-    width: min(40vw, 10rem);
-    height: min(40vw, 10rem);
+    width: min(45vw, 10rem);
+    height: min(45vw, 10rem);
   }
 }
 
