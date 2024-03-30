@@ -15,7 +15,6 @@ const item = products.find((i) => i.id === route.query.id);
 const imagesProducts = import.meta.glob('@images/products/*.*');
 
 const prevPath = window.history.state.back;
-const href = prevPath || '/Flowers/home';
 
 const cartStorage = JSON.parse(localStorage.getItem('cart-storage')) || {};
 const count = ref(
@@ -37,7 +36,7 @@ const addToCart = (productId, productCount) => {
           class="prev-button"
           aria-label="Перейти назад"
           :svg-id="'prev'"
-          :link="href"
+          :link="prevPath || '/Flowers/home'"
         />
       </div>
       <ImgTemplate
@@ -63,7 +62,7 @@ const addToCart = (productId, productCount) => {
           <router-link
             class="card__button"
             aria-label="добавить в корзину"
-            :to="href"
+            :to="prevPath || '/Flowers/home'"
             @click="addToCart(item.id, count)"
           >
             В корзину за&#160;{{ item.price * count }}&#160;₽

@@ -1,35 +1,32 @@
 <script setup>
 import ButtonSVG from '@components/ButtonSVG.vue';
+import SearchPopup from '@popups/SearchPopup.vue';
+import { useRoute } from 'vue-router';
 
-const iconsList = [
-  {
-    id: 'logo',
-    class: 'logo',
-    iconRatio: '170 26',
-    label: 'открыть домашнюю страницу сайта',
-  },
-  {
-    id: 'search',
-    label: 'открыть поиск',
-  },
-];
+const route = useRoute();
+
 </script>
 
 <template>
   <nav class="search-panel">
     <ul class="list">
-      <li
-        v-for="icon in iconsList"
-        :key="icon.id"
-      >
+      <li>
         <ButtonSVG
-          :svg-class="(icon.class ? icon.class : 'icon')"
-          :svg-id="icon.id"
-          :aria-label="icon.label"
-          :svg-ratio="icon.iconRatio"
+          svg-class="logo"
+          svg-id="logo"
+          aria-label="открыть домашнюю страницу сайта"
+          svg-ratio="170 26"
+        />
+      </li>
+      <li class="search">
+        <ButtonSVG
+          :link="`?search= `"
+          svg-id="search"
+          aria-label="открыть поиск"
         />
       </li>
     </ul>
+    <SearchPopup v-if="route.query.search" />
   </nav>
 </template>
 
@@ -39,7 +36,7 @@ const iconsList = [
 @use '@vars/breakpoints' as *;
 
 .search-panel {
-  z-index: 100;
+  z-index: 1000;
   position: sticky;
   top: 0;
   height: 3.5rem;

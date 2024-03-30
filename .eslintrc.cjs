@@ -24,6 +24,7 @@ module.exports = {
           ['@', './src/'],
           ['@components', './src/components'],
           ['@views', './src/views'],
+          ['@popups', './src/components/popups'],
           ['@images', './src/assets/images'],
           ['@icons', './src/assets/icons'],
           ['@fonts', './src/assets/fonts'],

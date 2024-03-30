@@ -1,5 +1,5 @@
 <script setup>
-import SearchPanel from '@components/SearchPanel.vue';
+import TopPanel from '@components/TopPanel.vue';
 import NavigationPanel from '@components/NavigationPanel.vue';
 import { useRoute } from 'vue-router';
 
@@ -11,7 +11,7 @@ const route = useRoute();
     <NavigationPanel
       v-if="!['card'].includes(route.name)"
     />
-    <SearchPanel
+    <TopPanel
       v-if="!['card'].includes(route.name)"
     />
     <router-view />

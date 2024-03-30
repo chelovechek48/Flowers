@@ -35,7 +35,7 @@ const getPrice = (vars) => {
         <ProductCard
           :item="product"
           :images="imagesProducts"
-          :slide-elements="['image', 'title', 'counter', 'price', 'favorites']"
+          :slide-elements="['image', 'title', 'price', 'favorites', 'counter']"
           :layout-is-grid="false"
           :is-cart="true"
           @countChanged="getPrice($event)"

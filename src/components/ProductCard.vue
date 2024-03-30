@@ -76,7 +76,7 @@ const addToFavorites = (id) => {
     <router-link
       class="card__link"
       :aria-label="item.description"
-      :to="`/Flowers/product?id=${item.id}`"
+      :to="`product?id=${item.id}`"
       :tabindex="isSlide ? '-1' : ''"
     />
     <div
