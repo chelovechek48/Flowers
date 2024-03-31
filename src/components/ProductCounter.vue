@@ -1,5 +1,7 @@
 <script setup>
-import { defineEmits, defineProps, ref } from 'vue';
+import {
+  defineEmits, defineProps, ref, onBeforeUpdate,
+} from 'vue';
 
 const emit = defineEmits(['countChanged']);
 const props = defineProps({
@@ -12,9 +14,14 @@ const props = defineProps({
     required: false,
     default: 1,
   },
+  id: {
+    type: String,
+    required: false,
+    default: '',
+  },
 });
-const count = ref(props.productCount);
 
+const count = ref(props.productCount);
 const changeCount = (increment) => {
   count.value = Math.max(Number(count.value) + increment, props.minCount);
   emit('countChanged', count.value);
@@ -33,6 +40,13 @@ const formattingCount = () => {
   emit('countChanged', count.value);
 };
 
+const input = ref(null);
+onBeforeUpdate(() => {
+  if (!(document.activeElement === input.value) && count.value !== 0) {
+    count.value = props.productCount;
+  }
+});
+
 </script>
 
 <template>
@@ -44,11 +58,12 @@ const formattingCount = () => {
       :disabled="count <= minCount"
     />
     <input
+      ref="input"
       class="counter"
       type="text"
       inputmode="numeric"
-      v-model="count"
       @change="formattingCount()"
+      v-model="count"
     >
     <button
       class="counter-button counter-button_increment"

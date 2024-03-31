@@ -25,6 +25,7 @@ onMounted(() => {
   <dialog
     ref="searchModal"
     class="search__wrapper"
+    @close="router.push({ query: { search: undefined } })"
   >
     <div class="search">
       <div class="search__top search__container">

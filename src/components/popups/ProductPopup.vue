@@ -1,7 +1,6 @@
 <script setup>
-import { ref } from 'vue';
-import { useRoute } from 'vue-router';
-import 'swiper/css';
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 import ImgTemplate from '@components/ImgTemplate.vue';
 import ButtonSVG from '@components/ButtonSVG.vue';
@@ -9,7 +8,7 @@ import ProductCounter from '@components/ProductCounter.vue';
 
 import products from '@/assets/data/products.json';
 
-const route = useRoute();
+const route = useRoute(); const router = useRouter();
 
 const item = products.find((i) => i.id === route.query.id);
 const imagesProducts = import.meta.glob('@images/products/*.*');
@@ -20,16 +19,24 @@ const cartStorage = JSON.parse(localStorage.getItem('cart-storage')) || {};
 const count = ref(
   cartStorage[item.id] || 1,
 );
-
 const addToCart = (productId, productCount) => {
   cartStorage[productId] = productCount;
   localStorage.setItem('cart-storage', JSON.stringify(cartStorage));
 };
 
+const cardModal = ref(null);
+onMounted(() => {
+  cardModal.value.showModal();
+});
+
 </script>
 
 <template>
-  <article class="card">
+  <dialog
+    class="card"
+    ref="cardModal"
+    @close="router.push({ query: { id: undefined } })"
+  >
     <div class="container">
       <div class="prev-button__wrapper">
         <ButtonSVG
@@ -70,7 +77,7 @@ const addToCart = (productId, productCount) => {
         </div>
       </div>
     </div>
-  </article>
+  </dialog>
 </template>
 
 <style lang="scss" scoped>
@@ -104,6 +111,10 @@ const addToCart = (productId, productCount) => {
 
 .card {
   font-family: "Arimo", sans-serif;
+  min-width: 100%;
+  min-height: 100%;
+  background-color: rgba(#000, 0.5);
+
   &__text {
     padding: container.$padding;
     display: flex;

@@ -1,35 +1,50 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onBeforeUpdate, onUnmounted } from 'vue';
 import products from '@/assets/data/products.json';
-
 import ProductCard from '@components/ProductCard.vue';
 
 const imagesProducts = import.meta.glob('@images/products/*.*');
 
-const cartStorage = JSON.parse(localStorage.getItem('cart-storage')) || {};
-
-const productFilter = ref(
-  products
-    .filter((prod) => cartStorage[prod.id])
+const getProductsFilter = () => {
+  const dataObject = JSON.parse(localStorage.getItem('cart-storage')) || {};
+  return products
+    .filter((prod) => dataObject[prod.id] >= 0)
     .map((prod) => (
-      { ...prod, count: cartStorage[prod.id] }
-    )),
-);
-
-const getPrice = (vars) => {
-  const f = productFilter.value.find((prod) => prod.id === vars.id);
-  f.count = vars.count;
+      { ...prod, count: dataObject[prod.id] }
+    ));
 };
+
+const productsFilter = ref(getProductsFilter());
+
+onBeforeUpdate(() => {
+  const storage = JSON.parse(localStorage.getItem('cart-storage')) || {};
+  productsFilter.value = products
+    .filter((prod) => storage[prod.id] >= 0)
+    .map((prod) => (
+      { ...prod, count: storage[prod.id] }
+    ));
+});
+
+onUnmounted(() => {
+  const cartStorageWithoutNull = JSON.parse(localStorage.getItem('cart-storage')) || {};
+  Object.keys(cartStorageWithoutNull).forEach((key) => {
+    if (cartStorageWithoutNull[key] === 0) {
+      delete cartStorageWithoutNull[key];
+    }
+  });
+  localStorage.setItem('cart-storage', JSON.stringify(cartStorageWithoutNull));
+});
+
 </script>
 
 <template>
   <section
     class="cart cart_not-empty"
-    v-if="productFilter.length"
+    v-if="productsFilter.length"
   >
     <ul class="list">
       <li
-        v-for="product in productFilter"
+        v-for="product in productsFilter"
         :key="product.id"
       >
         <ProductCard
@@ -38,7 +53,7 @@ const getPrice = (vars) => {
           :slide-elements="['image', 'title', 'price', 'favorites', 'counter']"
           :layout-is-grid="false"
           :is-cart="true"
-          @countChanged="getPrice($event)"
+          @countChanged="productsFilter = getProductsFilter()"
         />
       </li>
     </ul>
@@ -47,9 +62,7 @@ const getPrice = (vars) => {
       aria-label="Оформить заказ"
     >
       Заказать за {{
-        productFilter.map((prod) => {
-          return prod.price * prod.count
-        }).reduce((a, b) => a + b)
+        productsFilter.map((prod) => prod.price * prod.count).reduce((a, b) => a + b)
       }} ₽
     </button>
   </section>

@@ -1,5 +1,8 @@
 <script setup>
-import { defineEmits, defineProps, ref } from 'vue';
+import {
+  defineEmits, defineProps, ref, onBeforeUpdate,
+} from 'vue';
+import { useRouter } from 'vue-router';
 
 import ImgTemplate from '@components/ImgTemplate.vue';
 import SvgTemplate from '@components/SvgTemplate.vue';
@@ -38,20 +41,31 @@ const props = defineProps({
 
 const cartStorage = JSON.parse(localStorage.getItem('cart-storage')) || {};
 const count = ref(
-  cartStorage[props.item.id] || 1,
+  cartStorage[props.item.id] || 0,
 );
+
+onBeforeUpdate(() => {
+  count.value = (JSON.parse(localStorage.getItem('cart-storage')) || {})[props.item.id] || 1;
+});
+
+const router = useRouter();
+router.beforeEach((to, from) => {
+  if (from.query.id) {
+    count.value = 1;
+  }
+});
 
 const addToCart = (newCount) => {
   count.value = newCount;
   const currentCartStorage = JSON.parse(localStorage.getItem('cart-storage')) || {};
-  if (newCount > 0) {
+  if (newCount >= 0) {
     currentCartStorage[props.item.id] = newCount;
   } else {
     delete currentCartStorage[props.item.id];
   }
   localStorage.setItem('cart-storage', JSON.stringify(currentCartStorage));
 
-  emit('countChanged', { id: props.item.id, count: newCount });
+  emit('countChanged');
 };
 
 const favorites = JSON.parse(localStorage.getItem('favorites-storage')) || [];
@@ -76,7 +90,7 @@ const addToFavorites = (id) => {
     <router-link
       class="card__link"
       :aria-label="item.description"
-      :to="`product?id=${item.id}`"
+      :to="`?id=${item.id}`"
       :tabindex="isSlide ? '-1' : ''"
     />
     <div
@@ -144,6 +158,7 @@ const addToFavorites = (id) => {
         @countChanged="addToCart($event)"
         :product-count="count"
         :min-count="0"
+        :id="item.id"
       />
     </div>
   </div>
@@ -184,6 +199,9 @@ const addToFavorites = (id) => {
   display: flex;
   gap: 0.75rem;
   position: relative;
+
+  min-width: 100%;
+  min-height: 100%;
 
   &__link {
     position: absolute;
