@@ -73,12 +73,12 @@ const addToCart = () => {
   flex-direction: column;
   justify-content: space-between;
   @media (min-width: calc(breakpoints.$mobile-small + 1px)) {
-    min-height: calc(100vh - 3.5rem - 3.75rem);
-    min-height: calc(100dvh - 3.5rem - 3.75rem);
+    min-height: calc(100vh - 3.75rem);
+    min-height: calc(100dvh - 3.75rem);
   }
   @media (max-width: breakpoints.$mobile-small) {
-    min-height: calc(100vh - 3.5rem - 2.5rem);
-    min-height: calc(100dvh - 3.5rem - 2.5rem);
+    min-height: calc(100vh - 2.5rem);
+    min-height: calc(100dvh - 2.5rem);
   }
 
   &_empty {

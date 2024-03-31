@@ -25,9 +25,10 @@ const iconsList = [
     alt: 'сердечко',
   },
   {
-    id: 'map-marker',
-    title: 'На карте',
-    alt: 'метка на карте',
+    link: '?search= ',
+    id: 'search',
+    title: 'Поиск',
+    alt: 'лупа',
   },
 ];
 </script>
@@ -45,7 +46,7 @@ const iconsList = [
             :svg-id="icon.id"
             :button-text="icon.title"
             :aria-label="`Перейти в раздел ${icon.title}`"
-            :link="icon.id"
+            :link="icon.link || icon.id"
           />
         </li>
       </ul>

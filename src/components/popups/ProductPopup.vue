@@ -152,11 +152,11 @@ onMounted(() => {
   &__button {
     width: 100%;
     font-family: "Inter", sans-serif;
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 5vw, 1.25rem);
     text-align: center;
     color: #fff;
     background-color: colors.$pink;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem;
     border-radius: 0.5rem;
   }
 }

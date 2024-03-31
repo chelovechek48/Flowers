@@ -35,6 +35,7 @@ onMounted(() => {
           placeholder="Введите"
           v-model="inputText"
           @change="router.push({ query: { search: inputText } })"
+          @input="inputText = $event.target.value"
         >
         <button
           class="search__button"

@@ -122,7 +122,7 @@ watch(catalogLayoutIsGrid, (newValue) => {
 .aside {
   z-index: 200;
   position: sticky;
-  top: 3.5rem;
+  top: 0;
   background-color: colors.$light-gray;
 
   display: flex; align-items: center; justify-content: space-between;

@@ -1,6 +1,6 @@
 <script setup>
-import TopPanel from '@components/TopPanel.vue';
 import NavigationPanel from '@components/NavigationPanel.vue';
+import SearchPopup from '@popups/SearchPopup.vue';
 import ProductPopup from '@popups/ProductPopup.vue';
 import { useRoute } from 'vue-router';
 
@@ -12,10 +12,8 @@ const route = useRoute();
     <NavigationPanel
       v-if="!['card'].includes(route.name)"
     />
-    <TopPanel
-      v-if="!['card'].includes(route.name)"
-    />
     <router-view />
+    <SearchPopup v-if="route.query.search" />
     <ProductPopup v-if="route.query.id" />
   </div>
 </template>
